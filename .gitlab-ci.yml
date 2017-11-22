@@ -1,0 +1,11 @@
+image: clojure:alpine
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - lein test
+  tags:
+    - docker
