@@ -4,12 +4,14 @@
 
 (deftest config
 
-  (testing "default environment is 'development'"
-    (let [c (config/create-config {})]
-      (is (= "development" (c config/environment)))))
+  (testing "db-url is required"
+    (let [c (config/create-config {})
+          err (first c)]
+      (is (not (nil? err)))))
 
-  (testing "environment is configurable"
-    (let [c (config/create-config {config/environment "my-env"})]
-      (is (= "my-env" (c config/environment)))))
+  (testing "db-url is configurable"
+    (let [c (config/create-config {config/db-url "db-url"})
+          err (first c)]
+      (is (nil? err))))
 
   )

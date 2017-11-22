@@ -1,8 +1,11 @@
-(ns xchange.utils.config)
+(ns xchange.utils.config
+  (:require [bouncer.core :as b]
+            [bouncer.validators :as v]))
 
-(def environment :environment)
 (def db-url :db-url)
 
 (defn create-config
   [e]
-  {environment (e environment "development")})
+  (let [c {db-url (e :db-url)}]
+    (b/validate c
+                db-url v/required)))
