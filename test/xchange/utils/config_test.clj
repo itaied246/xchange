@@ -5,13 +5,16 @@
 (deftest config
 
   (testing "db-url is required"
-    (let [c (config/create-config {})
-          err (first c)]
-      (is (not (nil? err)))))
+    (let [[e c] (config/create-config {})]
+      (is (not (nil? e)))))
+
+  (testing "db-url is string"
+    (let [[e c] (config/create-config {config/db-url :db-url})]
+      (is (not (nil? e)))))
 
   (testing "db-url is configurable"
-    (let [c (config/create-config {config/db-url "db-url"})
-          err (first c)]
-      (is (nil? err))))
+    (let [[e c] (config/create-config {config/db-url "db-url"})]
+      (is (nil? e))
+      (is (= "db-url" (c config/db-url)))))
 
   )

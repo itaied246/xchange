@@ -6,6 +6,5 @@
 
 (defn create-config
   [e]
-  (let [c {db-url (e :db-url)}]
-    (b/validate c
-                db-url v/required)))
+  (b/validate e
+              db-url [v/required v/string]))
