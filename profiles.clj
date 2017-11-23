@@ -1,1 +1,1 @@
-{:dev {:env {:db-url "jdbc:postgresql://postgres:pass@localhost/xchange"}}}
+{:dev {:env {:db-url "postgresql://postgres:pass@localhost/xchange"}}}

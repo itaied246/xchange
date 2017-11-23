@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [environ "1.1.0"]
                  [bouncer "1.0.1"]
-                 [org.clojure/java.jdbc "0.7.3"]]
+                 [org.clojure/java.jdbc "0.7.3"]
+                 [org.postgresql/postgresql "42.1.4"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot xchange.core
   :target-path "target/%s"

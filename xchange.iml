@@ -49,6 +49,7 @@
     <orderEntry type="library" name="Leiningen: org.clojure/tools.nrepl:0.2.12" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.reader:1.0.0-beta3" level="project" />
     <orderEntry type="library" name="Leiningen: org.mozilla/rhino:1.7R5" level="project" />
+    <orderEntry type="library" name="Leiningen: org.postgresql/postgresql:42.1.4" level="project" />
     <orderEntry type="library" name="Leiningen: robert/hooke:1.3.0" level="project" />
     <orderEntry type="library" name="Leiningen: venantius/glow:0.1.4" level="project" />
     <orderEntry type="library" name="Leiningen: venantius/ultra:0.5.1" level="project" />
