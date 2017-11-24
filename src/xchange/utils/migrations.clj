@@ -11,6 +11,10 @@
      :migration-dir "migrations"
      :db            (c :db-url)}))
 
+(defn create
+  [f]
+  (migratus/create config f))
+
 (defn migrate
   []
   (migratus/migrate config))

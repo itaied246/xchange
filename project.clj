@@ -13,5 +13,6 @@
   :main ^:skip-aot xchange.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
-  :aliases {"migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
-            "rollback" ["run" "-m" "xchange.utils.migrations/rollback"]})
+  :aliases {"m:create"   ["run" "-m" "xchange.utils.migrations/create"]
+            "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
+            "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]})
