@@ -15,4 +15,5 @@
   :profiles {:uberjar {:aot :all}}
   :aliases {"m:create"   ["run" "-m" "xchange.utils.migrations/create"]
             "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
-            "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]})
+            "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]
+            "run:dev"    ["run" "with-profile" "dev"]})
