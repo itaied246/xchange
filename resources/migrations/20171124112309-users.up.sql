@@ -1,1 +1,3 @@
-CREATE TABLE IF NOT EXISTS users(id BIGINT)
+CREATE TABLE IF NOT EXISTS users (
+    id UUID primary key
+);
