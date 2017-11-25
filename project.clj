@@ -16,4 +16,5 @@
   :aliases {"m:create"   ["run" "-m" "xchange.utils.migrations/create"]
             "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
             "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]
+            "m:reset"    ["run" "-m" "xchange.utils.migrations/reset"]
             "run:dev"    ["run" "with-profile" "dev"]})
