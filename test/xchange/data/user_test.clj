@@ -1,8 +1,10 @@
 (ns xchange.data.user-test
   (:require [clojure.test :refer :all]
-            [xchange.data.user :refer [create-user]]))
+            [xchange.data.user :refer [create-user]]
+            [environ.core :refer [env]]
+            [xchange.utils.config :refer [create-config]]))
 
-(def con "postgresql://postgres:pass@localhost/xchange")
+(def con (->> env create-config second :db-url))
 
 (deftest user
 
