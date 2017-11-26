@@ -13,6 +13,7 @@ test:
     POSTGRES_USER: test
     POSTGRES_PASSWORD: test
   script:
+    - lein m:reset
     - lein test
   tags:
     - docker
