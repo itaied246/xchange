@@ -22,3 +22,7 @@
 (defn rollback
   []
   (migratus/rollback config))
+
+(defn reset
+  []
+  (migratus/reset config))
