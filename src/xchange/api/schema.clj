@@ -8,7 +8,11 @@
   []
   {:query/user-by-id (fn [context args value]
                        {:id   "KSK3=="
-                        :name "Itai Edri"})})
+                        :name "Itai Edri"})
+   :query/post-by-id (fn [context args value]
+                       {:id      "1"
+                        :user_id {:id   "10"
+                                  :name "Hila"}})})
 
 (defn load-schema
   []
