@@ -14,10 +14,22 @@
                         :user_id {:id   "10"
                                   :name "Hila"}})})
 
+(defn- load-objects
+  []
+  (->> (io/resource "schema/objects.edn")
+       slurp
+       edn/read-string
+       (assoc {} :objects)))
+
+(defn- load-query
+  []
+  (->> (io/resource "schema/queries.edn")
+       slurp
+       edn/read-string
+       (assoc {} :queries)))
+
 (defn load-schema
   []
-  (-> (io/resource "schema/schema.edn")
-      slurp
-      edn/read-string
+  (-> (merge (load-query) (load-objects))
       (util/attach-resolvers (resolver-map))
       schema/compile))

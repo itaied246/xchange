@@ -1,0 +1,9 @@
+{:User
+ {:description "Registered member"
+  :fields
+               {:id   {:type ID}
+                :name {:type (non-null String)}}}
+ :Post
+ {:fields
+  {:id      {:type ID}
+   :user_id {:type :User}}}}
