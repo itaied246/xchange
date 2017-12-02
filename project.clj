@@ -8,7 +8,8 @@
                  [bouncer "1.0.1"]
                  [org.clojure/java.jdbc "0.7.3"]
                  [org.postgresql/postgresql "42.1.4"]
-                 [migratus "1.0.1"]]
+                 [migratus "1.0.1"]
+                 [com.walmartlabs/lacinia "0.23.0-rc-1"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot xchange.core
   :target-path "target/%s"
