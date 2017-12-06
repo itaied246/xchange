@@ -1,9 +1,24 @@
-{:User
+{:user
  {:description "Registered member"
+  :implements  [:entity]
   :fields
-               {:id   {:type ID}
-                :name {:type (non-null String)}}}
- :Post
+               {:id         {:type (non-null ID)}
+                :name       {:type (non-null Int)}
+                :created_at {:type Float}}}
+ :post
  {:fields
-  {:id      {:type ID}
-   :user_id {:type :User}}}}
+  {:id   {:type ID}
+   :user {:type :user}
+   :game {:type :game}}}
+
+ :request
+ {:fields
+  {:id   {:type ID}
+   :user {:type :user}}}
+
+ :game
+ {:fields
+  {:name     {:type String}
+   :platform {:type :platform}
+   :image    {:type        String
+              :description "Default box image"}}}}

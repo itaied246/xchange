@@ -1,0 +1,4 @@
+{:entity
+ {:fields
+  {:id         {:type (non-null ID)}
+   :created_at {:type Float}}}}

@@ -1,12 +1,12 @@
 {:user_by_id
- {:type        :User
+ {:type        :user
   :description "Get a user by its ID"
   :args
                {:id {:type ID}}
   :resolve     :query/user-by-id}
 
  :post_by_id
- {:type    :Post
+ {:type    :post
   :args
            {:id {:type (non-null ID)}}
   :resolve :query/post-by-id}}
