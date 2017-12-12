@@ -15,13 +15,7 @@
   []
   {:query/user-by-id (fn [context args value]
                        {:id   "KSK3=="
-                        :name true})
-   :query/post-by-id (fn [context args value]
-                       {:id   "1"
-                        :user {:id   "10"
-                               :name "Hila"}
-                        :game {:name     "Tekken 7"
-                               :platform :PC}})})
+                        :name "Itai Edri"})})
 
 (defn- load-type
   [[key url]]

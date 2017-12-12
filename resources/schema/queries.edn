@@ -3,10 +3,4 @@
   :description "Get a user by its ID"
   :args
                {:id {:type ID}}
-  :resolve     :query/user-by-id}
-
- :post_by_id
- {:type    :post
-  :args
-           {:id {:type (non-null ID)}}
-  :resolve :query/post-by-id}}
+  :resolve     :query/user-by-id}}

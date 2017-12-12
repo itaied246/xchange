@@ -2,23 +2,39 @@
  {:description "Registered member"
   :implements  [:entity]
   :fields
-               {:id         {:type (non-null ID)}
-                :name       {:type (non-null Int)}
-                :created_at {:type Float}}}
- :post
- {:fields
-  {:id   {:type ID}
-   :user {:type :user}
-   :game {:type :game}}}
+               {:id         {:type ID}
+                :created_at {:type Float}
+                :name       {:type String}}}
+ :offer
+ {:implements [:post :entity]
+  :fields
+              {:id          {:type ID}
+               :created_at  {:type Float}
+               :price       {:type Int}
+               :description {:type String}
+               :platform    {:type :platform}
+               :user        {:type :user}
+               :game        {:type :game}
+               :comments    {:type (list :comment)}}}
 
  :request
- {:fields
-  {:id   {:type ID}
-   :user {:type :user}}}
+ {:implements [:post :entity]
+  :fields
+              {:id          {:type ID}
+               :created_at  {:type Float}
+               :description {:type String}
+               :platform    {:type :platform}
+               :user        {:type :user}
+               :game        {:type :game}
+               :comments    {:type (list :comment)}}}
 
  :game
  {:fields
-  {:name     {:type String}
-   :platform {:type :platform}
-   :image    {:type        String
-              :description "Default box image"}}}}
+  {:name  {:type String}
+   :image {:type        String
+           :description "Default box image"}}}
+
+ :comment
+ {:fields
+  {:user {:type :user}
+   :body {:type String}}}}

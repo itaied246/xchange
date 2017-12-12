@@ -1,4 +1,12 @@
 {:entity
  {:fields
-  {:id         {:type (non-null ID)}
-   :created_at {:type Float}}}}
+  {:id         {:type ID}
+   :created_at {:type Float}}}
+
+ :post
+ {:fields
+  {:description {:type String}
+   :platform    {:type :platform}
+   :comments    {:type (list :comment)}
+   :game        {:type :game}
+   :user        {:type :user}}}}
