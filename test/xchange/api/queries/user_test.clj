@@ -1,6 +1,6 @@
-(ns xchange.api.queries.user
+(ns xchange.api.queries.user_test
   (:require [clojure.test :refer :all]
-            [user :refer [q]]))
+            [xchange.test-utils :refer [q]]))
 
 
 (deftest user
@@ -10,5 +10,10 @@
           err (first (:errors res))]
       (is (not (nil? err)))
       (is (= '(:id) (:missing-arguments err)))))
+
+  (testing "query by id"
+    (let [res (q "{ user (id: \"1\") { id } }")
+          id (get-in res [:data :user :id])]
+      (is (= "1" id))))
 
   )
