@@ -5,8 +5,13 @@
 
  :post
  {:fields
-  {:description {:type String}
+  {:description {:type        String
+                 :description "User's free text describing the entity"}
+   :title       {:type        String
+                 :description "Game's title"}
+   :image       {:type        String
+                 :description "Game's default cover image"}
    :platform    {:type :platform}
    :comments    {:type (list :comment)}
-   :game        {:type :game}
-   :user        {:type :user}}}}
+   :user        {:type        :user
+                 :description "The owner of the post"}}}}

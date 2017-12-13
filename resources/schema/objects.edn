@@ -13,8 +13,9 @@
                :price       {:type Int}
                :description {:type String}
                :platform    {:type :platform}
+               :title       {:type String}
+               :image       {:type String}
                :user        {:type :user}
-               :game        {:type :game}
                :comments    {:type (list :comment)}}}
 
  :request
@@ -24,15 +25,10 @@
                :created_at  {:type Float}
                :description {:type String}
                :platform    {:type :platform}
+               :title       {:type String}
+               :image       {:type String}
                :user        {:type :user}
-               :game        {:type :game}
                :comments    {:type (list :comment)}}}
-
- :game
- {:fields
-  {:name  {:type String}
-   :image {:type        String
-           :description "Default box image"}}}
 
  :comment
  {:fields
