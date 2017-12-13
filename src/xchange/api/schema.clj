@@ -13,9 +13,9 @@
 
 (defn- resolver-map
   []
-  {:query/user-by-id (fn [context args value]
-                       {:id   "KSK3=="
-                        :name "Itai Edri"})})
+  {:query/user (fn [context args value]
+                 {:id   "KSK3=="
+                  :name "Itai Edri"})})
 
 (defn- load-type
   [[key url]]
