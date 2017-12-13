@@ -1,10 +1,9 @@
 {:user
- {:description "Registered member"
-  :implements  [:entity]
+ {:implements [:entity]
   :fields
-               {:id         {:type ID}
-                :created_at {:type Float}
-                :name       {:type String}}}
+              {:id         {:type ID}
+               :created_at {:type Float}
+               :name       {:type String}}}
  :offer
  {:implements [:post :entity]
   :fields
