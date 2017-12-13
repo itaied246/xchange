@@ -1,0 +1,3 @@
+{:platform
+ {:description "Supported gaming platforms"
+  :values      [:PLAYSTATION_4 :PLAYSTATION_3 :XBOX_ONE :XBOX_360 :PC]}}

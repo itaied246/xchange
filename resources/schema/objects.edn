@@ -1,9 +1,35 @@
-{:User
- {:description "Registered member"
+{:user
+ {:implements [:entity]
   :fields
-               {:id   {:type ID}
-                :name {:type (non-null String)}}}
- :Post
+              {:id         {:type ID}
+               :created_at {:type Float}
+               :name       {:type String}}}
+ :offer
+ {:implements [:post :entity]
+  :fields
+              {:id          {:type ID}
+               :created_at  {:type Float}
+               :price       {:type Int}
+               :description {:type String}
+               :platform    {:type :platform}
+               :title       {:type String}
+               :image       {:type String}
+               :user        {:type :user}
+               :comments    {:type (list :comment)}}}
+
+ :request
+ {:implements [:post :entity]
+  :fields
+              {:id          {:type ID}
+               :created_at  {:type Float}
+               :description {:type String}
+               :platform    {:type :platform}
+               :title       {:type String}
+               :image       {:type String}
+               :user        {:type :user}
+               :comments    {:type (list :comment)}}}
+
+ :comment
  {:fields
-  {:id      {:type ID}
-   :user_id {:type :User}}}}
+  {:user {:type :user}
+   :body {:type String}}}}

@@ -4,32 +4,34 @@
             [com.walmartlabs.lacinia.schema :as schema]
             [clojure.edn :as edn]))
 
-(defn resolver-map
+(defn- type-file
+  []
+  [[:objects "schema/objects.edn"]
+   [:enums "schema/enums.edn"]
+   [:queries "schema/queries.edn"]
+   [:interfaces "schema/interfaces.edn"]])
+
+(defn- resolver-map
   []
   {:query/user-by-id (fn [context args value]
                        {:id   "KSK3=="
-                        :name "Itai Edri"})
-   :query/post-by-id (fn [context args value]
-                       {:id      "1"
-                        :user_id {:id   "10"
-                                  :name "Hila"}})})
+                        :name "Itai Edri"})})
 
-(defn- load-objects
-  []
-  (->> (io/resource "schema/objects.edn")
+(defn- load-type
+  [[key url]]
+  (->> (io/resource url)
        slurp
        edn/read-string
-       (assoc {} :objects)))
+       (assoc {} key)))
 
-(defn- load-query
+(defn- build-schema
   []
-  (->> (io/resource "schema/queries.edn")
-       slurp
-       edn/read-string
-       (assoc {} :queries)))
+  (->> (type-file)
+       (map load-type)
+       (reduce merge)))
 
 (defn load-schema
   []
-  (-> (merge (load-query) (load-objects))
+  (-> (build-schema)
       (util/attach-resolvers (resolver-map))
       schema/compile))
