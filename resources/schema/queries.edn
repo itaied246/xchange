@@ -1,6 +1,6 @@
-{:user_by_id
+{:user
  {:type        :user
   :description "Get a user by its ID"
   :args
-               {:id {:type ID}}
-  :resolve     :query/user-by-id}}
+               {:id {:type (non-null ID)}}
+  :resolve     :query/user}}

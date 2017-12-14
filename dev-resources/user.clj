@@ -25,6 +25,7 @@
     m))
 
 (defn q
-  [query-string]
-  (-> (execute schema query-string nil nil)
-      simplify))
+  ([query-string] (q query-string nil))
+  ([query-string context]
+   (-> (execute schema query-string nil context)
+       simplify)))
