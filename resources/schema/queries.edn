@@ -8,4 +8,11 @@
  :users
  {:type        (list :user)
   :description "Get all the users"
-  :resolve     :query/users}}
+  :resolve     :query/users}
+
+ :offer
+ {:type        :offer
+  :description "Get an offer by its ID"
+  :args
+               {:id {:type (non-null ID)}}
+  :resolve     :query/offer}}

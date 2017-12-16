@@ -16,7 +16,9 @@
   {:query/user  (fn [context args value]
                   ((:query/user context)))
    :query/users (fn [context args value]
-                  ((:query/users context)))})
+                  ((:query/users context)))
+   :query/offer (fn [context args value]
+                  ((:query/offer context)))})
 
 (defn- load-type
   [[key url]]
