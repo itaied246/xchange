@@ -3,4 +3,9 @@
   :description "Get a user by its ID"
   :args
                {:id {:type (non-null ID)}}
-  :resolve     :query/user}}
+  :resolve     :query/user}
+
+ :users
+ {:type        (list :user)
+  :description "Get all the users"
+  :resolve     :query/users}}

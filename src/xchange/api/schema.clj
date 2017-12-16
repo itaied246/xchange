@@ -13,8 +13,10 @@
 
 (defn- resolver-map
   []
-  {:query/user (fn [context args value]
-                 ((:query/user context)))})
+  {:query/user  (fn [context args value]
+                  ((:query/user context)))
+   :query/users (fn [context args value]
+                  ((:query/users context)))})
 
 (defn- load-type
   [[key url]]

@@ -7,13 +7,18 @@
 
   (testing "id is required"
     (let [res (q "{ user { id } }")
-          err (first (:errors res))]
+          err (->> res :errors first)]
       (is (not (nil? err)))
       (is (= '(:id) (:missing-arguments err)))))
 
   (testing "query by id"
     (let [res (q "{ user (id: \"1\") { id } }")
-          id (get-in res [:data :user :id])]
-      (is (= "1" id))))
+          err (first (:errors res))]
+      (is (nil? err))))
+
+  (testing "query all users"
+    (let [res (q "{ users { id } }")
+          err (->> res :errors first)]
+      (is (nil? err))))
 
   )
