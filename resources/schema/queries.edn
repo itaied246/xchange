@@ -6,5 +6,6 @@
   :resolve     :query/user}
 
  :users
- {:type    (list :user)
-  :resolve :query/users}}
+ {:type        (list :user)
+  :description "Get all the users"
+  :resolve     :query/users}}
