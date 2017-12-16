@@ -1,11 +1,8 @@
 (ns user
   (:require
-    [xchange.api.schema :refer [load-schema]]
     [com.walmartlabs.lacinia :refer [execute]]
     [clojure.walk :as walk])
   (:import (clojure.lang IPersistentMap)))
-
-(def schema (load-schema))
 
 (defn simplify
   "Converts all ordered maps nested within the map into standard hash maps, and
@@ -25,7 +22,7 @@
     m))
 
 (defn q
-  ([query-string] (q query-string nil))
-  ([query-string context]
+  ([schema query-string] (q schema query-string nil))
+  ([schema query-string context]
    (-> (execute schema query-string nil context)
        simplify)))
