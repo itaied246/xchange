@@ -26,7 +26,7 @@
      (is (nil? err#))))
 
 (defmacro missing-args?
-  [query args]
+  [args query]
   `(let [res# (q ~query)
          err# (->> res# :errors first)]
      (is (not (nil? err#)))

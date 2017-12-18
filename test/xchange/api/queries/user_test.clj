@@ -2,11 +2,10 @@
   (:require [clojure.test :refer :all]
             [xchange.test-utils :refer [valid? missing-args?]]))
 
-
 (deftest user
 
   (testing "id is required"
-    (missing-args? "{ user { id } }" '(:id)))
+    (missing-args? '(:id) "{ user { id } }"))
 
   (testing "query by id"
     (valid? "{ user (id: \"1\") { id } }"))

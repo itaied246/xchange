@@ -5,7 +5,7 @@
 (deftest request
 
   (testing "id is required"
-    (missing-args? "{ request { id } }" '(:id)))
+    (missing-args? '(:id) "{ request { id } }"))
 
   (testing "query by id"
     (valid? "{ request (id: \"1\") { id } }"))
@@ -14,4 +14,3 @@
     (valid? "{ requests { id } }"))
 
   )
-

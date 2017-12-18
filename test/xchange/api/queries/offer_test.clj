@@ -5,7 +5,7 @@
 (deftest offer
 
   (testing "id is required"
-    (missing-args? "{ offer { id } }" '(:id)))
+    (missing-args? '(:id) "{ offer { id } }"))
 
   (testing "query by id"
     (valid? "{ offer (id: \"1\") { id } }"))
