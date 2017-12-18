@@ -1,24 +1,17 @@
 (ns xchange.api.queries.user_test
   (:require [clojure.test :refer :all]
-            [xchange.test-utils :refer [q]]))
+            [xchange.test-utils :refer [valid? missing-args?]]))
 
 
 (deftest user
 
   (testing "id is required"
-    (let [res (q "{ user { id } }")
-          err (->> res :errors first)]
-      (is (not (nil? err)))
-      (is (= '(:id) (:missing-arguments err)))))
+    (missing-args? "{ user { id } }" '(:id)))
 
   (testing "query by id"
-    (let [res (q "{ user (id: \"1\") { id } }")
-          err (first (:errors res))]
-      (is (nil? err))))
+    (valid? "{ user (id: \"1\") { id } }"))
 
   (testing "query all users"
-    (let [res (q "{ users { id } }")
-          err (->> res :errors first)]
-      (is (nil? err))))
+    (valid? "{ users { id } }"))
 
   )

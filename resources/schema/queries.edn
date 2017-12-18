@@ -15,4 +15,9 @@
   :description "Get an offer by its ID"
   :args
                {:id {:type (non-null ID)}}
-  :resolve     :query/offer}}
+  :resolve     :query/offer}
+
+ :offers
+ {:type        (list :offer)
+  :description "Get a list of offers"
+  :resolve     :query/offers}}
