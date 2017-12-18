@@ -4,10 +4,14 @@
             [xchange.api.schema :refer [load-schema]]))
 
 (def stub-resolvers
-  {:query/user   (fn [& _] {:id "1"})
-   :query/users  (fn [& _] '({:id "1"}))
-   :query/offer  (fn [& _] {:id "1"})
-   :query/offers (fn [& _] '({:id "1"}))})
+  (let [id {:id "1"}
+        ids '(id)]
+    {:query/user     (fn [& _] id)
+     :query/users    (fn [& _] ids)
+     :query/offer    (fn [& _] id)
+     :query/offers   (fn [& _] ids)
+     :query/request  (fn [& _] id)
+     :query/requests (fn [& _] ids)}))
 
 (def schema (load-schema stub-resolvers))
 

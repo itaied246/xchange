@@ -10,4 +10,7 @@
   (testing "query by id"
     (valid? "{ offer (id: \"1\") { id } }"))
 
+  (testing "query multiple offers"
+    (valid? "{ offers { id } }"))
+
   )

@@ -20,4 +20,16 @@
  :offers
  {:type        (list :offer)
   :description "Get a list of offers"
-  :resolve     :query/offers}}
+  :resolve     :query/offers}
+
+ :request
+ {:type        :request
+  :description "Get a request by its ID"
+  :args
+               {:id {:type (non-null ID)}}
+  :resolve     :query/request}
+
+ :requests
+ {:type        (list :request)
+  :description "Get a list of requests"
+  :resolve     :query/requests}}
