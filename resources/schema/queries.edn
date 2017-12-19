@@ -25,11 +25,12 @@
  :request
  {:type        :request
   :description "Get a request by its ID"
-  :args
-               {:id {:type (non-null ID)}}
+  :args        {:id {:type (non-null ID)}}
   :resolve     :query/request}
 
  :requests
  {:type        (list :request)
   :description "Get a list of requests"
+  :args        {:platform {:type :platform}
+                :title    {:type String}}
   :resolve     :query/requests}}

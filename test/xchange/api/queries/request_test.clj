@@ -13,4 +13,9 @@
   (testing "query multiple requests"
     (valid? "{ requests { id } }"))
 
+  (testing "query with filter arguments"
+    (valid? "{ requests (platform: PC
+                         title: \"Tekken 7\")
+                        { id } }"))
+
   )
