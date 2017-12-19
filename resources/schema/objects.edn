@@ -30,6 +30,9 @@
                :comments    {:type (list :comment)}}}
 
  :comment
- {:fields
-  {:user {:type :user}
-   :body {:type String}}}}
+ {:implements [:entity]
+  :fields
+              {:id         {:type ID}
+               :created_at {:type Float}
+               :body       {:type String}
+               :user       {:type :user}}}}
