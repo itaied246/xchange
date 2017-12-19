@@ -11,13 +11,6 @@
    [:queries "schema/queries.edn"]
    [:interfaces "schema/interfaces.edn"]])
 
-(defn- resolver-map
-  []
-  {:query/user  (fn [context args value]
-                  ((:query/user context)))
-   :query/users (fn [context args value]
-                  ((:query/users context)))})
-
 (defn- load-type
   [[key url]]
   (->> (io/resource url)
@@ -32,7 +25,7 @@
        (reduce merge)))
 
 (defn load-schema
-  []
+  [resolver-map]
   (-> (build-schema)
-      (util/attach-resolvers (resolver-map))
+      (util/attach-resolvers resolver-map)
       schema/compile))
