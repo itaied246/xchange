@@ -12,25 +12,29 @@
  :offer
  {:type        :offer
   :description "Get an offer by its ID"
-  :args        {:id {:type (non-null ID)}}
+  :args
+               {:id {:type (non-null ID)}}
   :resolve     :query/offer}
 
  :offers
  {:type        (list :offer)
   :description "Get a list of offers"
-  :args        {:platform {:type :platform}
+  :args
+               {:platform {:type :platform}
                 :title    {:type String}}
   :resolve     :query/offers}
 
  :request
  {:type        :request
   :description "Get a request by its ID"
-  :args        {:id {:type (non-null ID)}}
+  :args
+               {:id {:type (non-null ID)}}
   :resolve     :query/request}
 
  :requests
  {:type        (list :request)
   :description "Get a list of requests"
-  :args        {:platform {:type :platform}
+  :args
+               {:platform {:type :platform}
                 :title    {:type String}}
   :resolve     :query/requests}}
