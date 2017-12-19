@@ -13,4 +13,9 @@
   (testing "query multiple offers"
     (valid? "{ offers { id } }"))
 
+  (testing "query with filter arguments"
+    (valid? "{ offers (platform: PC
+                       title: \"Tekken 7\")
+                      { id } }"))
+
   )
