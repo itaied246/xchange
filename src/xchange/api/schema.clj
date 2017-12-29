@@ -6,10 +6,11 @@
 
 (defn- type-file
   []
-  [[:objects "schema/objects.edn"]
+  [[:interfaces "schema/interfaces.edn"]
+   [:objects "schema/objects.edn"]
    [:enums "schema/enums.edn"]
    [:queries "schema/queries.edn"]
-   [:interfaces "schema/interfaces.edn"]])
+   [:mutations "schema/mutations.edn"]])
 
 (defn- load-type
   [[key url]]
