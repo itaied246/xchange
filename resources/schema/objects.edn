@@ -3,7 +3,10 @@
   :fields
               {:id         {:type ID}
                :created_at {:type Float}
-               :name       {:type String}}}
+               :name       {:type String}
+               :offers     {:type (list :offer)}
+               :requests   {:type (list :request)}
+               :comments   {:type (list :comment)}}}
  :offer
  {:implements [:post :entity]
   :fields
