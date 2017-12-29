@@ -5,7 +5,7 @@
 
 (def stub-resolvers
   (let [id {:id "1"}
-        ids '(id)]
+        ids [id]]
     {:query/user           (fn [& _] id)
      :query/users          (fn [& _] ids)
      :query/offer          (fn [& _] id)

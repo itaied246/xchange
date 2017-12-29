@@ -1,7 +1,12 @@
 (ns user
   (:require
     [com.walmartlabs.lacinia :refer [execute]]
-    [clojure.walk :as walk])
+    [clojure.walk :as walk]
+    [com.walmartlabs.lacinia.pedestal :as lp]
+    [io.pedestal.http :as http]
+    [clojure.java.browse :refer [browse-url]]
+    [xchange.api.schema :refer [load-schema]]
+    [xchange.api.resolvers :refer [resolver-map]])
   (:import (clojure.lang IPersistentMap)))
 
 (defn simplify
@@ -26,3 +31,30 @@
   ([schema query-string context]
    (-> (execute schema query-string nil context)
        simplify)))
+
+(defonce server nil)
+
+(defn start-server
+  [_]
+  (let [schema (load-schema resolver-map)
+        server (-> schema
+                   (lp/service-map {:graphiql true})
+                   http/create-server
+                   http/start)]
+    (browse-url "http://localhost:8888/")
+    server))
+
+(defn stop-server
+  [server]
+  (http/stop server)
+  nil)
+
+(defn start
+  []
+  (alter-var-root #'server start-server)
+  :started)
+
+(defn stop
+  []
+  (alter-var-root #'server stop-server)
+  :stopped)
