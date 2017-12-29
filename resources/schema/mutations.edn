@@ -1,0 +1,6 @@
+{:create_user
+ {:type        :user
+  :description "Create a new user"
+  :args
+               {:name {:type (non-null String)}}
+  :resolve     :mutation/create-user}}
