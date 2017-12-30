@@ -10,7 +10,8 @@
                  [org.postgresql/postgresql "42.1.4"]
                  [migratus "1.0.1"]
                  [com.walmartlabs/lacinia-pedestal "0.5.0"]
-                 [io.aviso/logging "0.2.0"]]
+                 [io.aviso/logging "0.2.0"]
+                 [com.stuartsierra/component "0.3.2"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot xchange.core
   :target-path "target/%s"

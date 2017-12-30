@@ -2,11 +2,9 @@
   (:require
     [com.walmartlabs.lacinia :refer [execute]]
     [clojure.walk :as walk]
-    [com.walmartlabs.lacinia.pedestal :as lp]
-    [io.pedestal.http :as http]
     [clojure.java.browse :refer [browse-url]]
-    [xchange.api.schema :refer [load-schema]]
-    [xchange.api.resolvers :refer [resolver-map]])
+    [xchange.system :as system]
+    [com.stuartsierra.component :as component])
   (:import (clojure.lang IPersistentMap)))
 
 (defn simplify
@@ -26,35 +24,23 @@
         node))
     m))
 
+(defonce system (system/new-system))
+
 (defn q
-  ([schema query-string] (q schema query-string nil))
-  ([schema query-string context]
-   (-> (execute schema query-string nil context)
-       simplify)))
-
-(defonce server nil)
-
-(defn start-server
-  [_]
-  (let [schema (load-schema resolver-map)
-        server (-> schema
-                   (lp/service-map {:graphiql true})
-                   http/create-server
-                   http/start)]
-    (browse-url "http://localhost:8888/")
-    server))
-
-(defn stop-server
-  [server]
-  (http/stop server)
-  nil)
+  [query-string]
+  (-> system
+      :schema-provider
+      :schema
+      (execute query-string nil nil)
+      simplify))
 
 (defn start
   []
-  (alter-var-root #'server start-server)
+  (alter-var-root #'system component/start-system)
+  (browse-url "http://localhost:8888/")
   :started)
 
 (defn stop
   []
-  (alter-var-root #'server stop-server)
+  (alter-var-root #'system component/stop-system)
   :stopped)
