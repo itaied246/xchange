@@ -23,12 +23,11 @@
         node))
     m))
 
-(def schema (new-schema-provider))
+(def schema (component/start (:schema-provider (new-schema-provider))))
 
 (defn q
   [query-string]
   (-> schema
-      :schema-provider
       :schema
       (execute query-string nil nil)
       simplify))
