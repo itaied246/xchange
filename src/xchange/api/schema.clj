@@ -3,10 +3,10 @@
             [com.walmartlabs.lacinia.util :as util]
             [com.walmartlabs.lacinia.schema :as schema]
             [clojure.edn :as edn]
-            [com.stuartsierra.component :as component]))
+            [com.stuartsierra.component :as component]
+            [xchange.api.resolvers.resolver-map :refer [resolver-map]]))
 
-(defn- type-file
-  []
+(def type-file
   [[:interfaces "schema/interfaces.edn"]
    [:objects "schema/objects.edn"]
    [:enums "schema/enums.edn"]
@@ -22,23 +22,11 @@
 
 (defn- build-schema
   []
-  (->> (type-file)
+  (->> type-file
        (map load-type)
        (reduce merge)))
 
-(defn resolver-map
-  [component]
-  (let [id {:id "1"}
-        ids [id]]
-    {:query/user           (fn [& _] id)
-     :query/users          (fn [& _] ids)
-     :query/offer          (fn [& _] id)
-     :query/offers         (fn [& _] ids)
-     :query/request        (fn [& _] id)
-     :query/requests       (fn [& _] ids)
-     :mutation/create-user (fn [& _] id)}))
-
-(defn load-schema
+(defn- load-schema
   [component]
   (-> (build-schema)
       (util/attach-resolvers (resolver-map component))

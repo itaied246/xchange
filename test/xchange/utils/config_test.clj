@@ -9,12 +9,12 @@
       (is (not (nil? e)))))
 
   (testing "db-url is string"
-    (let [[e c] (config/create-config {config/db-url :db-url})]
+    (let [[e c] (config/create-config {:db-url :db-url})]
       (is (not (nil? e)))))
 
   (testing "db-url is configurable"
-    (let [[e c] (config/create-config {config/db-url "db-url"})]
+    (let [[e c] (config/create-config {:db-url "db-url"})]
       (is (nil? e))
-      (is (= "db-url" (c config/db-url)))))
+      (is (= "db-url" (:db-url c)))))
 
   )

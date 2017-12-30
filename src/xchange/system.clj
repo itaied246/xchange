@@ -5,7 +5,8 @@
     [xchange.server :as server]))
 
 (defn new-system
-  []
-  (merge (component/system-map)
-         (server/new-server)
-         (schema/new-schema-provider)))
+  [config]
+  (let []
+    (merge (component/system-map)
+           (server/new-server (:port config))
+           (schema/new-schema-provider))))

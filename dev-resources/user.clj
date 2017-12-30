@@ -1,38 +1,10 @@
 (ns user
   (:require
-    [com.walmartlabs.lacinia :refer [execute]]
-    [clojure.walk :as walk]
     [clojure.java.browse :refer [browse-url]]
     [xchange.system :as system]
-    [com.stuartsierra.component :as component])
-  (:import (clojure.lang IPersistentMap)))
+    [com.stuartsierra.component :as component]))
 
-(defn simplify
-  "Converts all ordered maps nested within the map into standard hash maps, and
-   sequences into vectors, which makes for easier constants in the tests, and eliminates ordering problems."
-  [m]
-  (walk/postwalk
-    (fn [node]
-      (cond
-        (instance? IPersistentMap node)
-        (into {} node)
-
-        (seq? node)
-        (vec node)
-
-        :else
-        node))
-    m))
-
-(defonce system (system/new-system))
-
-(defn q
-  [query-string]
-  (-> system
-      :schema-provider
-      :schema
-      (execute query-string nil nil)
-      simplify))
+(defonce system (system/new-system {}))
 
 (defn start
   []

@@ -3,7 +3,7 @@
             [com.walmartlabs.lacinia.pedestal :as lp]
             [io.pedestal.http :as http]))
 
-(defrecord Server [schema-provider server]
+(defrecord Server [port schema-provider server]
 
   component/Lifecycle
 
@@ -11,6 +11,7 @@
     (assoc this :server (-> schema-provider
                             :schema
                             (lp/service-map {:graphiql true})
+                            (merge {::http/port port})
                             http/create-server
                             http/start)))
 
@@ -19,6 +20,6 @@
     (assoc this :server nil)))
 
 (defn new-server
-  []
-  {:server (component/using (map->Server {})
+  [port]
+  {:server (component/using (map->Server {:port port})
                             [:schema-provider])})

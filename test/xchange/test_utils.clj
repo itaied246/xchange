@@ -1,7 +1,37 @@
 (ns xchange.test-utils
-  (:require [user :refer [q]]
-            [clojure.test :refer [is]]
-            [xchange.api.schema :refer [load-schema]]))
+  (:require [clojure.test :refer [is]]
+            [com.stuartsierra.component :as component]
+            [clojure.walk :as walk]
+            [com.walmartlabs.lacinia :refer [execute]]
+            [xchange.api.schema :refer [new-schema-provider]])
+  (:import (clojure.lang IPersistentMap)))
+
+(defn simplify
+  "Converts all ordered maps nested within the map into standard hash maps, and
+   sequences into vectors, which makes for easier constants in the tests, and eliminates ordering problems."
+  [m]
+  (walk/postwalk
+    (fn [node]
+      (cond
+        (instance? IPersistentMap node)
+        (into {} node)
+
+        (seq? node)
+        (vec node)
+
+        :else
+        node))
+    m))
+
+(def schema (new-schema-provider))
+
+(defn q
+  [query-string]
+  (-> schema
+      :schema-provider
+      :schema
+      (execute query-string nil nil)
+      simplify))
 
 (defmacro valid?
   [query]
