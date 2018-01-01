@@ -1,10 +1,10 @@
 (ns xchange.utils.config
-  (:require [bouncer.core :as b]
-            [bouncer.validators :as v]))
+  (:require [struct.core :as st]))
+
+(def schema
+  [[:db-url st/required st/string]
+   [:port st/required st/integer-str]])
 
 (defn create-config
-  [conf]
-  (-> {:db-url (:db-url conf)
-       :port   (Integer/parseInt (:port conf))}
-      (b/validate :db-url [v/required v/string]
-                  :port [v/required v/number])))
+  [env]
+  (st/validate env schema))
