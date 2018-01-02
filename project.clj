@@ -1,4 +1,4 @@
-(defproject xchange "0.1.0-SNAPSHOT"
+(defproject xchange "app"
   :description "Social platform for video games exchange"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
