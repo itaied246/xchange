@@ -2,6 +2,7 @@ variables:
   APP_IMAGE: xchage:$CI_COMMIT_SHA
   HEROKU_REGISTRY: registry.heroku.com
   HEROKU_IMAGE: $HEROKU_REGISTRY/$HEROKU_APP/web
+  DOCKER_DRIVER: overlay2
 
 image: clojure:alpine
 
@@ -41,6 +42,8 @@ uberjar:
 build:
   image: docker
   stage: build
+  services:
+    - docker:dind
   script:
     - docker build -t $APP_IMAGE .
     - docker tag $APP_IMAGE $HEROKU_IMAGE
@@ -52,6 +55,8 @@ build:
 deploy:
   image: docker
   stage: deploy
+  services:
+    - docker:dind
   before_script:
     - docker login -u $HEROKU_USERNAME -p $HEROKU_PASSWORD $HEROKU_REGISTRY
   script:
