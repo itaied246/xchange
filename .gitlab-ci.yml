@@ -1,5 +1,6 @@
 variables:
-  APP_IMAGE: xchage:$CI_COMMIT_SHA
+  GITLAB_REGISTRY: registry.gitlab.com
+  GITLAB_IMAGE: $GITLAB_REGISTRY/itaied246/xchange
   HEROKU_REGISTRY: registry.heroku.com
   HEROKU_IMAGE: $HEROKU_REGISTRY/$HEROKU_APP/web
   DOCKER_DRIVER: overlay2
@@ -44,9 +45,11 @@ build:
   stage: build
   services:
     - docker:dind
+  before_script:
+    - docker login -u _ -p $GITLAB_PASSWORD $GITLAB_REGISTRY
   script:
-    - docker build -t $APP_IMAGE .
-    - docker tag $APP_IMAGE $HEROKU_IMAGE
+    - docker build -t $GITLAB_IMAGE .
+    - docker push $GITLAB_IMAGE
   tags:
     - docker
   only:
@@ -58,8 +61,10 @@ deploy:
   services:
     - docker:dind
   before_script:
-    - docker login -u $HEROKU_USERNAME -p $HEROKU_PASSWORD $HEROKU_REGISTRY
+    - docker login -u _ -p $HEROKU_PASSWORD $HEROKU_REGISTRY
+    - docker login -u _ -p $GITLAB_PASSWORD $GITLAB_REGISTRY
   script:
+    - docker tag $GITLAB_IMAGE $HEROKU_IMAGE
     - docker push $HEROKU_IMAGE
   tags:
     - docker
