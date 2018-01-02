@@ -1,6 +1,6 @@
 variables:
   GITLAB_REGISTRY: registry.gitlab.com
-  GITLAB_IMAGE: $GITLAB_REGISTRY/itaied246/xchange
+  GITLAB_IMAGE: $GITLAB_REGISTRY/itaied246/xchange:$CI_COMMIT_SHA
   HEROKU_REGISTRY: registry.heroku.com
   HEROKU_IMAGE: $HEROKU_REGISTRY/$HEROKU_APP/web
   DOCKER_DRIVER: overlay2
