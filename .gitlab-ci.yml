@@ -64,6 +64,7 @@ deploy:
     - docker login -u _ -p $HEROKU_PASSWORD $HEROKU_REGISTRY
     - docker login -u _ -p $GITLAB_PASSWORD $GITLAB_REGISTRY
   script:
+    - docker pull $GITLAB_IMAGE
     - docker tag $GITLAB_IMAGE $HEROKU_IMAGE
     - docker push $HEROKU_IMAGE
   tags:
