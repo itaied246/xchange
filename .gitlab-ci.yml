@@ -35,6 +35,8 @@ uberjar:
       - target/uberjar/xchange-app-standalone.jar
   tags:
     - docker
+  only:
+    - master
 
 build:
   image: docker
@@ -44,6 +46,8 @@ build:
     - docker tag $APP_IMAGE $HEROKU_IMAGE
   tags:
     - docker
+  only:
+    - master
 
 deploy:
   image: docker
@@ -54,3 +58,5 @@ deploy:
     - docker push $HEROKU_IMAGE
   tags:
     - docker
+  only:
+    - master
