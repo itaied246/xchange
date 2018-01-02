@@ -2,10 +2,11 @@
   (:require [clojure.java.io :as io]
             [com.walmartlabs.lacinia.util :as util]
             [com.walmartlabs.lacinia.schema :as schema]
-            [clojure.edn :as edn]))
+            [clojure.edn :as edn]
+            [com.stuartsierra.component :as component]
+            [xchange.api.resolvers.resolver-map :refer [resolver-map]]))
 
-(defn- type-file
-  []
+(def type-file
   [[:interfaces "schema/interfaces.edn"]
    [:objects "schema/objects.edn"]
    [:enums "schema/enums.edn"]
@@ -21,12 +22,26 @@
 
 (defn- build-schema
   []
-  (->> (type-file)
+  (->> type-file
        (map load-type)
        (reduce merge)))
 
-(defn load-schema
-  [resolver-map]
+(defn- load-schema
+  [component]
   (-> (build-schema)
-      (util/attach-resolvers resolver-map)
+      (util/attach-resolvers (resolver-map component))
       schema/compile))
+
+(defrecord SchemaProvider [schema]
+
+  component/Lifecycle
+
+  (start [this]
+    (assoc this :schema (load-schema this)))
+
+  (stop [this]
+    (assoc this :schema nil)))
+
+(defn new-schema-provider
+  []
+  {:schema-provider (map->SchemaProvider {})})

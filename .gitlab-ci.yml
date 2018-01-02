@@ -1,7 +1,15 @@
+variables:
+  APP_IMAGE: xchage:$CI_COMMIT_SHA
+  HEROKU_REGISTRY: registry.heroku.com
+  HEROKU_IMAGE: $HEROKU_REGISTRY/$HEROKU_APP/web
+
 image: clojure:alpine
 
 stages:
   - test
+  - uberjar
+  - build
+  - deploy
 
 test:
   stage: test
@@ -17,3 +25,38 @@ test:
     - lein test
   tags:
     - docker
+
+uberjar:
+  stage: uberjar
+  script:
+    - lein uberjar
+  artifacts:
+    paths:
+      - target/uberjar/xchange-app-standalone.jar
+  tags:
+    - docker
+  only:
+    - master
+
+build:
+  image: docker
+  stage: build
+  script:
+    - docker build -t $APP_IMAGE .
+    - docker tag $APP_IMAGE $HEROKU_IMAGE
+  tags:
+    - docker
+  only:
+    - master
+
+deploy:
+  image: docker
+  stage: deploy
+  before_script:
+    - docker login -u $HEROKU_USERNAME -p $HEROKU_PASSWORD $HEROKU_REGISTRY
+  script:
+    - docker push $HEROKU_IMAGE
+  tags:
+    - docker
+  only:
+    - master
