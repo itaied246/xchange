@@ -1,6 +1,5 @@
 variables:
-  GITLAB_REGISTRY: registry.gitlab.com
-  GITLAB_IMAGE: $GITLAB_REGISTRY/itaied246/xchange:$CI_COMMIT_SHA
+  GITLAB_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   HEROKU_REGISTRY: registry.heroku.com
   HEROKU_IMAGE: $HEROKU_REGISTRY/$HEROKU_APP/web
   DOCKER_DRIVER: overlay2
@@ -46,7 +45,7 @@ build:
   services:
     - docker:dind
   before_script:
-    - docker login -u _ -p $GITLAB_PASSWORD $GITLAB_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker build -t $GITLAB_IMAGE .
     - docker push $GITLAB_IMAGE
@@ -62,7 +61,7 @@ deploy:
     - docker:dind
   before_script:
     - docker login -u _ -p $HEROKU_PASSWORD $HEROKU_REGISTRY
-    - docker login -u _ -p $GITLAB_PASSWORD $GITLAB_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker pull $GITLAB_IMAGE
     - docker tag $GITLAB_IMAGE $HEROKU_IMAGE
