@@ -4,7 +4,7 @@
     [xchange.system :as system]
     [com.stuartsierra.component :as component]))
 
-(defonce system (system/new-system {}))
+(defonce system (system/new-system {:port 8888}))
 
 (defn start
   []

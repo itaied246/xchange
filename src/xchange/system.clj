@@ -2,11 +2,13 @@
   (:require
     [com.stuartsierra.component :as component]
     [xchange.api.schema :as schema]
-    [xchange.server :as server]))
+    [xchange.server.server :as server]))
 
 (defn new-system
   [config]
-  (let []
-    (merge (component/system-map)
-           (server/new-server (:port config))
-           (schema/new-schema-provider))))
+  (let [{:keys [port]} config]
+    (component/system-map
+      :schema (schema/new-schema)
+      :server (component/using
+                (server/new-server port)
+                [:schema]))))

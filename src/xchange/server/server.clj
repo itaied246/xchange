@@ -1,14 +1,14 @@
-(ns xchange.server
+(ns xchange.server.server
   (:require [com.stuartsierra.component :as component]
             [com.walmartlabs.lacinia.pedestal :as lp]
             [io.pedestal.http :as http]))
 
-(defrecord Server [port schema-provider server]
+(defrecord Server [port schema server]
 
   component/Lifecycle
 
   (start [this]
-    (assoc this :server (-> schema-provider
+    (assoc this :server (-> schema
                             :schema
                             (lp/service-map {:graphiql true})
                             (merge {::http/port port})
@@ -21,5 +21,4 @@
 
 (defn new-server
   [port]
-  {:server (component/using (map->Server {:port port})
-                            [:schema-provider])})
+  (map->Server {:port port}))

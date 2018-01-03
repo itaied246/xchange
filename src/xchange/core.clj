@@ -9,5 +9,5 @@
   [& args]
   (let [[err conf] (create-config env)]
     (if (nil? err)
-      (component/start-system (system/new-system conf))
+      (component/start (system/new-system conf))
       (println err))))

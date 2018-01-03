@@ -3,7 +3,7 @@
             [com.stuartsierra.component :as component]
             [clojure.walk :as walk]
             [com.walmartlabs.lacinia :refer [execute]]
-            [xchange.api.schema :refer [new-schema-provider]])
+            [xchange.api.schema :refer [new-schema]])
   (:import (clojure.lang IPersistentMap)))
 
 (defn simplify
@@ -23,8 +23,7 @@
         node))
     m))
 
-(def schema (-> (new-schema-provider)
-                :schema-provider
+(def schema (-> (new-schema)
                 component/start
                 :schema))
 
