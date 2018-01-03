@@ -32,7 +32,7 @@
       (util/attach-resolvers (resolver-map component))
       schema/compile))
 
-(defrecord SchemaProvider [schema]
+(defrecord Schema [schema]
 
   component/Lifecycle
 
@@ -42,6 +42,6 @@
   (stop [this]
     (assoc this :schema nil)))
 
-(defn new-schema-provider
+(defn new-schema
   []
-  {:schema-provider (map->SchemaProvider {})})
+  (map->Schema {}))
