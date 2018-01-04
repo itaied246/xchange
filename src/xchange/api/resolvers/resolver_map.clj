@@ -1,4 +1,5 @@
-(ns xchange.api.resolvers.resolver-map)
+(ns xchange.api.resolvers.resolver-map
+  (:require [xchange.api.resolvers.mutation.create-offer :refer [create-offer]]))
 
 (defn resolver-map
   [component]
@@ -12,4 +13,4 @@
      :query/requests        (fn [& _] ids)
 
      :mutation/create-user  (fn [& _] id)
-     :mutation/create-offer (fn [& _] id)}))
+     :mutation/create-offer create-offer}))
