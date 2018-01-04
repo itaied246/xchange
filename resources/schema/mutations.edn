@@ -3,4 +3,14 @@
   :description "Create a new user"
   :args
                {:name {:type (non-null String)}}
-  :resolve     :mutation/create-user}}
+  :resolve     :mutation/create-user}
+
+ :create_offer
+ {:type        :offer
+  :description "Create a new offer"
+  :args
+               {:price       {:type Int}
+                :description {:type String}
+                :platform    {:type (non-null :platform)}
+                :title       {:type String}}
+  :resolve     :mutation/create-offer}}
