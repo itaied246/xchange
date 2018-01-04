@@ -12,5 +12,5 @@
                {:price       {:type Int}
                 :description {:type String}
                 :platform    {:type (non-null :platform)}
-                :title       {:type String}}
+                :title       {:type (non-null String)}}
   :resolve     :mutation/create-offer}}
