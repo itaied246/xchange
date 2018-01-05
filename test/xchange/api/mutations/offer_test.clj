@@ -30,8 +30,8 @@
       (invalid-args? '(:description)
                      (str
                        "mutation { create_offer (title: \"Tekken 7\"
-                                   platform: PC
-                                   description: \""
+                                                 platform: PC
+                                                 description: \""
                        (clojure.string/join
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
@@ -41,11 +41,31 @@
       (invalid-args? '(:title)
                      (str
                        "mutation { create_offer (platform: PC
-                                   title: \""
+                                                 title: \""
                        (clojure.string/join
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
 
+  )
 
+(deftest add-offer-comment
+
+  (testing "successfully add a comment"
+    (valid? "mutation { add_offer_comment (offer_id: \"1\"
+                                           body: \"body\")
+                                           { id } }"))
+
+  (testing "offer-id and body are required"
+    (missing-args? '(:offer_id :body) "mutation { add_offer_comment { id } }"))
+
+  (testing "body max length is 5000"
+    (let [exceed-length 5001]
+      (invalid-args? '(:body)
+                     (str
+                       "mutation { add_offer_comment (offer_id: \"1\"
+                                                      body: \""
+                       (clojure.string/join
+                         (take exceed-length (repeat "q")))
+                       "\"){ id } }"))))
 
   )

@@ -13,4 +13,12 @@
                 :description {:type String}
                 :platform    {:type (non-null :platform)}
                 :title       {:type (non-null String)}}
-  :resolve     :mutation/create-offer}}
+  :resolve     :mutation/create-offer}
+
+ :add_offer_comment
+ {:type        :comment
+  :description "Comment on the specified offer"
+  :args
+               {:body     {:type (non-null String)}
+                :offer_id {:type (non-null ID)}}
+  :resolve     :mutation/add-offer-comment}}

@@ -6,6 +6,8 @@
             [xchange.api.schema :refer [new-schema]])
   (:import (clojure.lang IPersistentMap)))
 
+(defn set= [& vectors] (apply = (map set vectors)))
+
 (defn simplify
   "Converts all ordered maps nested within the map into standard hash maps, and
    sequences into vectors, which makes for easier constants in the tests, and eliminates ordering problems."
@@ -44,10 +46,10 @@
   `(let [res# (q ~query)
          err-msg# (-> res# :errors first (:message "{}"))
          bad-args# (->> err-msg# read-string keys)]
-     (is (= ~args bad-args#))))
+     (is (set= bad-args# ~args))))
 
 (defmacro missing-args?
   [args query]
   `(let [res# (q ~query)
          err# (->> res# :errors first)]
-     (is (= ~args (:missing-arguments err#)))))
+     (is (set= (:missing-arguments err#) ~args))))
