@@ -14,10 +14,16 @@
                                       description: \"Great game.\") { id } }"))
 
   (testing "price is positive"
-    (invalid-args? '(:price) "mutation { create_offer (title: \"Tekken 7\" platform: PC price: -5) { id } }"))
+    (invalid-args? '(:price) "mutation { create_offer (title: \"Tekken 7\"
+                                                        platform: PC
+                                                        price: -5)
+                                                        { id } }"))
 
   (testing "price is less than 1000"
-    (invalid-args? '(:price) "mutation { create_offer (title: \"Tekken 7\" platform: PC price: 1000) { id } }"))
+    (invalid-args? '(:price) "mutation { create_offer (title: \"Tekken 7\"
+                                                        platform: PC
+                                                        price: 1000)
+                                                        { id } }"))
 
   (testing "description max length is 5000"
     (let [exceed-length 5001]
@@ -39,5 +45,7 @@
                        (clojure.string/join
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
+
+
 
   )

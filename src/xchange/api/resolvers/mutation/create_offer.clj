@@ -9,7 +9,6 @@
 
 (defn create-offer
   [context args value]
-  (let [[err _] (st/validate args schema)
-        err-msg (str err)]
-    (if (not (nil? err))
+  (let [err-msg (-> args (st/validate schema) first str)]
+    (if-not (empty? err-msg)
       (resolve-as nil {:message err-msg}))))
