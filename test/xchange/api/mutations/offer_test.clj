@@ -46,11 +46,6 @@
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
 
-  (testing "title is alpha numeric"
-    (invalid-args? '(:title) "mutation { create_offer (title: \"לא תקין\"
-                                                        platform: PC)
-                                                        { id } }"))
-
   )
 
 (deftest add-offer-comment
