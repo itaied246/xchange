@@ -15,6 +15,17 @@
                 :title       {:type (non-null String)}}
   :resolve     :mutation/create-offer}
 
+ :update_offer
+ {:type        :offer
+  :description "Update the specified offer"
+  :args
+               {:offer_id    {:type (non-null ID)}
+                :price       {:type Int}
+                :description {:type String}
+                :platform    {:type :platform}
+                :title       {:type String}}
+  :resolve     :mutation/update-offer}
+
  :add_offer_comment
  {:type        :comment
   :description "Comment on the specified offer"

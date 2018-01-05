@@ -14,4 +14,5 @@
 
      :mutation/create-user       (fn [& _] id)
      :mutation/create-offer      m.offer/create-offer
-     :mutation/add-offer-comment m.offer/add-offer-comment}))
+     :mutation/add-offer-comment m.offer/add-offer-comment
+     :mutation/update-offer      m.offer/update-offer}))

@@ -46,6 +46,11 @@
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
 
+  (testing "title is alpha numeric"
+    (invalid-args? '(:title) "mutation { create_offer (title: \"לא תקין\"
+                                                        platform: PC)
+                                                        { id } }"))
+
   )
 
 (deftest add-offer-comment
@@ -67,5 +72,20 @@
                        (clojure.string/join
                          (take exceed-length (repeat "q")))
                        "\"){ id } }"))))
+
+  )
+
+(deftest update-offer
+
+  (testing "successfully update an offer"
+    (valid? "mutation { update_offer (offer_id: \"1\"
+                                      price: 5
+                                      description: \"greate game\"
+                                      platform: PC
+                                      title: \"Tekken 5\")
+                                      { id } }"))
+
+  (testing "offer-id is required"
+    (missing-args? '(:offer_id) "mutation { update_offer { id } }"))
 
   )
