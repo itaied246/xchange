@@ -3,7 +3,8 @@
             [com.walmartlabs.lacinia.resolve :refer [resolve-as]]))
 
 (def schema
-  {:price [st/positive [st/in-range 1 999]]})
+  {:price       [st/positive [st/in-range 1 999]]
+   :description [[st/max-count 5000]]})
 
 (defn create-offer
   [context args value]

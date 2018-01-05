@@ -42,14 +42,12 @@
 (defmacro invalid-args?
   [args query]
   `(let [res# (q ~query)
-         err# (->> res# :errors first)
-         bad-args# (->> err# :message read-string keys)]
-     (is (not (nil? err#)))
+         err-msg# (-> res# :errors first (:message "{}"))
+         bad-args# (->> err-msg# read-string keys)]
      (is (= ~args bad-args#))))
 
 (defmacro missing-args?
   [args query]
   `(let [res# (q ~query)
          err# (->> res# :errors first)]
-     (is (not (nil? err#)))
      (is (= ~args (:missing-arguments err#)))))
