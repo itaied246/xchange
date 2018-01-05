@@ -26,6 +26,13 @@
                 :title       {:type String}}
   :resolve     :mutation/update-offer}
 
+ :remove_offer
+ {:type        ID
+  :description "Remove the specified offer"
+  :args
+               {:offer_id {:type (non-null ID)}}
+  :resolve     :mutation/remove-offer}
+
  :add_offer_comment
  {:type        :comment
   :description "Comment on the specified offer"

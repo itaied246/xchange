@@ -29,6 +29,9 @@
     (if-not res
       (resolve-as nil err-msg))))
 
+(defn remove-offer
+  [context args value])
+
 (defn add-offer-comment
   [context args value]
   (let [[res err-msg] (validate-args comment-input-schema args)]

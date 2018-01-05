@@ -89,3 +89,13 @@
     (missing-args? '(:offer_id) "mutation { update_offer { id } }"))
 
   )
+
+(deftest remove-offer
+
+  (testing "successfully remove an offer"
+    (valid? "mutation { remove_offer (offer_id: \"1\") }"))
+
+  (testing "offer-id is required"
+    (missing-args? '(:offer_id) "mutation { remove_offer }"))
+
+  )
