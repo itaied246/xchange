@@ -1,5 +1,6 @@
 (ns xchange.api.resolvers.resolver-map
-  (:require [xchange.api.resolvers.mutations.offer :as m.offer]))
+  (:require [xchange.api.resolvers.mutations.offer :as m.offer]
+            [xchange.api.resolvers.mutations.comment :as m.comment]))
 
 (defn resolver-map
   [component]
@@ -16,4 +17,7 @@
      :mutation/create-offer      m.offer/create-offer
      :mutation/add-offer-comment m.offer/add-offer-comment
      :mutation/update-offer      m.offer/update-offer
-     :mutation/remove-offer      m.offer/remove-offer}))
+     :mutation/remove-offer      m.offer/remove-offer
+
+     :mutation/remove-comment    m.comment/remove-comment
+     :mutation/update-comment    m.comment/update-comment}))
