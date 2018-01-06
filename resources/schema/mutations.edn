@@ -19,7 +19,7 @@
  {:type        :offer
   :description "Update the specified offer"
   :args
-               {:offer_id    {:type (non-null ID)}
+               {:id    {:type (non-null ID)}
                 :price       {:type Int}
                 :description {:type String}
                 :platform    {:type :platform}
@@ -30,7 +30,7 @@
  {:type        ID
   :description "Remove the specified offer"
   :args
-               {:offer_id {:type (non-null ID)}}
+               {:id {:type (non-null ID)}}
   :resolve     :mutation/remove-offer}
 
  :add_offer_comment
