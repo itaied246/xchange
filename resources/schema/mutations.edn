@@ -19,7 +19,7 @@
  {:type        :offer
   :description "Update the specified offer"
   :args
-               {:id    {:type (non-null ID)}
+               {:id          {:type (non-null ID)}
                 :price       {:type Int}
                 :description {:type String}
                 :platform    {:type :platform}
@@ -37,8 +37,8 @@
  {:type        :comment
   :description "Comment on the specified offer"
   :args
-               {:body     {:type (non-null String)}
-                :offer_id {:type (non-null ID)}}
+               {:body {:type (non-null String)}
+                :id   {:type (non-null ID)}}
   :resolve     :mutation/add-offer-comment}
 
  :update_comment
