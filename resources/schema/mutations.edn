@@ -39,4 +39,19 @@
   :args
                {:body     {:type (non-null String)}
                 :offer_id {:type (non-null ID)}}
-  :resolve     :mutation/add-offer-comment}}
+  :resolve     :mutation/add-offer-comment}
+
+ :update_comment
+ {:type        :comment
+  :description "Update the specified comment"
+  :args
+               {:id   {:type (non-null ID)}
+                :body {:type String}}
+  :resolve     :mutation/update-comment}
+
+ :remove_comment
+ {:type        ID
+  :description "Remove the specified comment"
+  :args
+               {:id {:type (non-null ID)}}
+  :resolve     :mutation/remove-comment}}
