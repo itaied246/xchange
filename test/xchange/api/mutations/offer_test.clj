@@ -73,24 +73,24 @@
 (deftest update-offer
 
   (testing "successfully update an offer"
-    (valid? "mutation { update_offer (offer_id: \"1\"
+    (valid? "mutation { update_offer (id: \"1\"
                                       price: 5
                                       description: \"greate game\"
                                       platform: PC
                                       title: \"Tekken 5\")
                                       { id } }"))
 
-  (testing "offer-id is required"
-    (missing-args? '(:offer_id) "mutation { update_offer { id } }"))
+  (testing "id is required"
+    (missing-args? '(:id) "mutation { update_offer { id } }"))
 
   )
 
 (deftest remove-offer
 
   (testing "successfully remove an offer"
-    (valid? "mutation { remove_offer (offer_id: \"1\") }"))
+    (valid? "mutation { remove_offer (id: \"1\") }"))
 
-  (testing "offer-id is required"
-    (missing-args? '(:offer_id) "mutation { remove_offer }"))
+  (testing "id is required"
+    (missing-args? '(:id) "mutation { remove_offer }"))
 
   )
