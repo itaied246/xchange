@@ -51,18 +51,18 @@
 (deftest add-offer-comment
 
   (testing "successfully add a comment"
-    (valid? "mutation { add_offer_comment (offer_id: \"1\"
+    (valid? "mutation { add_offer_comment (id: \"1\"
                                            body: \"body\")
                                            { id } }"))
 
-  (testing "offer-id and body are required"
-    (missing-args? '(:offer_id :body) "mutation { add_offer_comment { id } }"))
+  (testing "id and body are required"
+    (missing-args? '(:id :body) "mutation { add_offer_comment { id } }"))
 
   (testing "body max length is 5000"
     (let [exceed-length 5001]
       (invalid-args? '(:body)
                      (str
-                       "mutation { add_offer_comment (offer_id: \"1\"
+                       "mutation { add_offer_comment (id: \"1\"
                                                       body: \""
                        (clojure.string/join
                          (take exceed-length (repeat "q")))
