@@ -9,6 +9,10 @@
    :description [[st/max-count 5000]]
    :title       [[st/max-count 100]]})
 
+(def request-input-schema
+  {:description [[st/max-count 5000]]
+   :title       [[st/max-count 100]]})
+
 (defn validate-args
   [schema args]
   (let [err-msg (-> args (st/validate schema) first str)]

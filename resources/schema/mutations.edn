@@ -33,6 +33,25 @@
                {:id {:type (non-null ID)}}
   :resolve     :mutation/remove-offer}
 
+ :create_request
+ {:type        :request
+  :description "Create a new request"
+  :args
+               {:description {:type String}
+                :platform    {:type (non-null :platform)}
+                :title       {:type (non-null String)}}
+  :resolve     :mutation/create-request}
+
+ :update_request
+ {:type        :request
+  :description "Update the specified request"
+  :args
+               {:id          {:type (non-null ID)}
+                :description {:type String}
+                :platform    {:type :platform}
+                :title       {:type String}}
+  :resolve     :mutation/update-request}
+
  :add_offer_comment
  {:type        :comment
   :description "Comment on the specified offer"
@@ -40,6 +59,21 @@
                {:body {:type (non-null String)}
                 :id   {:type (non-null ID)}}
   :resolve     :mutation/add-offer-comment}
+
+ :remove_request
+ {:type        ID
+  :description "Remove the specified request"
+  :args
+               {:id {:type (non-null ID)}}
+  :resolve     :mutation/remove-request}
+
+ :add_request_comment
+ {:type        :comment
+  :description "Comment on the specified request"
+  :args
+               {:body {:type (non-null String)}
+                :id   {:type (non-null ID)}}
+  :resolve     :mutation/add-request-comment}
 
  :update_comment
  {:type        :comment
