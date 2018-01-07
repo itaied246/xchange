@@ -1,6 +1,5 @@
 (ns xchange.api.resolvers.mutations.offer
-  (:require [struct.core :as st]
-            [com.walmartlabs.lacinia.resolve :refer [resolve-as]]
+  (:require [com.walmartlabs.lacinia.resolve :refer [resolve-as]]
             [xchange.api.schema-validations :as sv]))
 
 (defn create-offer
