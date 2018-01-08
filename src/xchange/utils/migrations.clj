@@ -13,8 +13,8 @@
       (println err))))
 
 (defn create
-  [f]
-  (migratus/create config f))
+  [description]
+  (migratus/create config description))
 
 (defn migrate
   []
