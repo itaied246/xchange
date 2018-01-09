@@ -4,6 +4,8 @@
               {:id         {:type ID}
                :created_at {:type Float}
                :name       {:type String}
+               :email      {:type String}
+               :phone      {:type String}
                :offers     {:type (list :offer)}
                :requests   {:type (list :request)}
                :comments   {:type (list :comment)}}}

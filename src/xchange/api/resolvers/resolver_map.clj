@@ -1,7 +1,8 @@
 (ns xchange.api.resolvers.resolver-map
   (:require [xchange.api.resolvers.mutations.offer :as m.offer]
             [xchange.api.resolvers.mutations.request :as m.request]
-            [xchange.api.resolvers.mutations.comment :as m.comment]))
+            [xchange.api.resolvers.mutations.comment :as m.comment]
+            [xchange.api.resolvers.mutations.user :as m.user]))
 
 (defn resolver-map
   [component]
@@ -14,7 +15,7 @@
      :query/request                (fn [& _] id)
      :query/requests               (fn [& _] ids)
 
-     :mutation/create-user         (fn [& _] id)
+     :mutation/create-user         m.user/create-user
 
      :mutation/create-offer        m.offer/create-offer
      :mutation/add-offer-comment   m.offer/add-offer-comment
