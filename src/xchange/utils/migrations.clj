@@ -3,17 +3,18 @@
             [environ.core :refer [env]]
             [xchange.utils.config :refer [create-config]]))
 
-; TODO handle config error
-
 (def config
-  (let [[e c] (create-config env)]
-    {:store         :database
-     :migration-dir "migrations"
-     :db            (c :db-url)}))
+  (let [[err conf] (create-config env)
+        db-url (:db-url conf)]
+    (if (nil? err)
+      {:store         :database
+       :migration-dir "migrations"
+       :db            db-url}
+      (println err))))
 
 (defn create
-  [f]
-  (migratus/create config f))
+  [description]
+  (migratus/create config description))
 
 (defn migrate
   []
