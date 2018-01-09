@@ -2,7 +2,9 @@
  {:type        :user
   :description "Create a new user"
   :args
-               {:name {:type (non-null String)}}
+               {:name  {:type (non-null String)}
+                :email {:type String}
+                :phone {:type String}}
   :resolve     :mutation/create-user}
 
  :create_offer

@@ -1,6 +1,6 @@
 (ns xchange.api.mutations.user-test
   (:require [clojure.test :refer :all]
-            [xchange.test-utils :refer [valid? missing-args?]]))
+            [xchange.test-utils :refer [valid? missing-args? invalid-args?]]))
 
 (deftest create-user
 
@@ -9,5 +9,15 @@
 
   (testing "successfully creates a user"
     (valid? "mutation { create_user (name: \"Rich Hickey\") { id } }"))
+
+  (testing "email is correct"
+    (invalid-args? '(:email) "mutation { create_user (name: \"Rich Hickey\"
+                                                      email: \"incorrect.mail\")
+                                                      { id } }"))
+
+  (testing "phone is correct"
+    (invalid-args? '(:phone) "mutation { create_user (name: \"Rich Hickey\"
+                                                      phone: \"123456789\")
+                                                      { id } }"))
 
   )
