@@ -8,7 +8,10 @@
     (missing-args? '(:name) "mutation { create_user { id } }"))
 
   (testing "successfully creates a user"
-    (valid? "mutation { create_user (name: \"Rich Hickey\") { id } }"))
+    (valid? "mutation { create_user (name: \"Rich Hickey\"
+                                     phone: \"1234567890\"
+                                     email: \"e@mail.com\")
+                                     { id } }"))
 
   (testing "email is correct"
     (invalid-args? '(:email) "mutation { create_user (name: \"Rich Hickey\"

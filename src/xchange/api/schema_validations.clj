@@ -1,6 +1,11 @@
 (ns xchange.api.schema-validations
   (:require [struct.core :as st]))
 
+(def phone-validation
+  {:message  "must be a valid phone number"
+   :optional true
+   :validate (partial re-matches #"\d{10}")})
+
 (def comment-input-schema
   {:body [[st/max-count 5000]]})
 
@@ -14,7 +19,8 @@
    :title       [[st/max-count 100]]})
 
 (def user-input-schema
-  {:email [st/email]})
+  {:email [st/email]
+   :phone phone-validation})
 
 (defn validate-args
   [schema args]
