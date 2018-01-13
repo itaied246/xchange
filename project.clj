@@ -3,7 +3,7 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [environ "1.1.0"]
                  [funcool/struct "1.1.0"]
                  [org.clojure/java.jdbc "0.7.3"]
@@ -11,7 +11,8 @@
                  [migratus "1.0.1"]
                  [com.walmartlabs/lacinia-pedestal "0.5.0"]
                  [io.aviso/logging "0.2.0"]
-                 [com.stuartsierra/component "0.3.2"]]
+                 [com.stuartsierra/component "0.3.2"]
+                 [com.gfredericks/test.chuck "0.2.8"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot xchange.core
   :target-path "target/%s"
@@ -20,4 +21,5 @@
             "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
             "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]
             "m:reset"    ["run" "-m" "xchange.utils.migrations/reset"]
-            "run:dev"    ["run" "with-profile" "dev"]})
+            "run:dev"    ["run" "with-profile" "dev"]}
+  :monkeypatch-clojure-test false)
