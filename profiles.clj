@@ -1,2 +1,2 @@
 {:dev {:env {:db-url "postgresql://postgres:pass@localhost/xchange"
-             :port "8080"}}}
+             :port "8080s"}}}

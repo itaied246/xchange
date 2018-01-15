@@ -1,16 +1,17 @@
 (ns xchange.utils.migrations
   (:require [migratus.core :as migratus]
             [environ.core :refer [env]]
-            [xchange.utils.config :refer [create-config]]))
+            [xchange.utils.config :refer [create-config-spec]]))
 
 (def config
-  (let [[err conf] (create-config env)
-        db-url (:db-url conf)]
-    (if (nil? err)
+  (try
+    (let [conf (create-config env)
+          db-url (:db-url conf)]
       {:store         :database
        :migration-dir "migrations"
-       :db            db-url}
-      (println err))))
+       :db            db-url})
+    (catch Exception e
+      (println e))))
 
 (defn create
   [description]

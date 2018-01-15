@@ -1,6 +1,5 @@
 (ns xchange.utils.config
-  (:require [struct.core :as st]
-            [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as s]
             [com.gfredericks.test.chuck.generators :as cg]))
 
 (def port-regex #"[1-9]\d{1,4}")
@@ -18,23 +17,15 @@
   (let [port (:port conf)]
     (assoc conf :port (Integer/parseInt port))))
 
-(defn create-config-spec
+(defn create-config
   [env]
   (let [conf (s/conform ::config env)]
     (if (s/invalid? conf)
       (throw (ex-info "Invalid input" (s/explain-data ::config env)))
       (parse-config env))))
 
-(s/fdef create-config-spec
+(s/fdef create-config
         :args (s/cat :env ::config)
         :ret :config.parsed/config
         :fn #(= (-> % :ret :port str)
                 (-> % :args :env :port)))
-
-(def schema
-  [[:db-url st/required st/string]
-   [:port st/required st/integer-str]])
-
-(defn create-config
-  [env]
-  (st/validate env schema))
