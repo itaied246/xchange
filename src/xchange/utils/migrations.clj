@@ -1,7 +1,7 @@
 (ns xchange.utils.migrations
   (:require [migratus.core :as migratus]
             [environ.core :refer [env]]
-            [xchange.utils.config :refer [create-config-spec]]))
+            [xchange.utils.config :refer [create-config]]))
 
 (def config
   (try
