@@ -1,7 +1,11 @@
 (ns xchange.api.resolvers.mutations.comment
   (:require [struct.core :as st]
             [com.walmartlabs.lacinia.resolve :refer [resolve-as]]
-            [xchange.api.schema-validations :as sv]))
+            [xchange.api.schema-validations :as sv]
+            [xchange.utils.validations :as v]
+            [clojure.spec.alpha :as s]))
+
+(s/def ::body (s/and string? (partial v/length-in-range 1 5000)))
 
 (defn remove-comment
   [context args value])
