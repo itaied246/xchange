@@ -8,7 +8,7 @@
 
 (s/def ::phone (s/and string? (partial re-matches phone-regex)))
 (s/def ::email (s/and string? (partial re-matches email-regex)))
-(s/def ::name (s/and string? (partial v/length-in-range 1 50)))
+(s/def ::name (s/and string? (comp not empty?) (partial v/max-length 50)))
 
 (defmacro do-if-valid
   [spec val body]

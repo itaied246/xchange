@@ -21,14 +21,3 @@
   (testing "name max length is 50"
     (let [exceed-name (clojure.string/join (repeat 51 "q"))]
       (is (not (s/valid? :xchange.api.resolvers.mutations.user/name exceed-name))))))
-
-(deftest create-user
-
-  (testing "name is required"
-    (missing-args? '(:name) "mutation { create_user { id } }"))
-
-  (testing "successfully creates a user"
-    (valid? "mutation { create_user (name: \"Rich Hickey\"
-                                     phone: \"1234567890\"
-                                     email: \"e@mail.com\")
-                                     { id } }")))

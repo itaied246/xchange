@@ -5,7 +5,7 @@
             [xchange.utils.validations :as v]
             [clojure.spec.alpha :as s]))
 
-(s/def ::body (s/and string? (partial v/length-in-range 1 5000)))
+(s/def ::body (s/and string? (comp not empty?) (partial v/max-length 5000)))
 
 (defn remove-comment
   [context args value])
