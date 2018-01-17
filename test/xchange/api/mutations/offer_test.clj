@@ -3,7 +3,7 @@
             [xchange.test-utils :refer [invalid-args? valid? missing-args? q]]
             [clojure.spec.alpha :as s]))
 
-(deftest create-offer-input
+(deftest offer-spec
 
   (testing "price is positive"
     (is (not (s/valid? :xchange.api.resolvers.mutations.offer/price -5))))
@@ -16,36 +16,24 @@
       (is (not (s/valid?
                  :xchange.api.resolvers.mutations.offer/description
                  (clojure.string/join
-                   (take exceed-length (repeat "q"))))))))
+                   (repeat exceed-length "q")))))))
 
   (testing "title max length is 100"
     (let [exceed-length 101]
       (is (not (s/valid?
                  :xchange.api.resolvers.mutations.offer/title
                  (clojure.string/join
-                   (take exceed-length (repeat "q")))))))))
+                   (repeat exceed-length "q")))))))
 
-(deftest add-offer-comment
+  (testing "title is not empty"
+    (is (not (s/valid?
+               :xchange.api.resolvers.mutations.offer/title
+               ""))))
 
-  (testing "successfully add a comment"
-    (valid? "mutation { add_offer_comment (id: \"1\"
-                                           body: \"body\")
-                                           { id } }"))
-
-  (testing "id and body are required"
-    (missing-args? '(:id :body) "mutation { add_offer_comment { id } }"))
-
-  (testing "body max length is 5000"
-    (let [exceed-length 5001]
-      (invalid-args? '(:body)
-                     (str
-                       "mutation { add_offer_comment (id: \"1\"
-                                                      body: \""
-                       (clojure.string/join
-                         (take exceed-length (repeat "q")))
-                       "\"){ id } }"))))
-
-  )
+  (testing "id is not empty"
+    (is (not (s/valid?
+               :xchange.api.resolvers.mutations.offer/id
+               "")))))
 
 (deftest update-offer
 

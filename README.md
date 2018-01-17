@@ -4,6 +4,19 @@ https://hidden-castle-86100.herokuapp.com/
 
 Social platform for video games exchange.
 
+## Data Validations
+
+**GraphQL**
+
+- Input types
+- Required and optionals (`null`)
+- Predefined values (`enums`)
+
+**Spec**
+
+- Regex
+- Limits
+
 ## Development
 
 Run the following services
