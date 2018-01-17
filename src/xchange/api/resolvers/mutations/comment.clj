@@ -23,3 +23,9 @@
   (let [[res err-msg] (sv/validate-args sv/comment-input-schema args)]
     (if-not res
       (resolve-as nil err-msg))))
+
+(defn add-request-comment
+  [context args value]
+  (let [[res err-msg] (sv/validate-args sv/comment-input-schema args)]
+    (if-not res
+      (resolve-as nil err-msg))))

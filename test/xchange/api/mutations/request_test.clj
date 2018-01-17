@@ -1,6 +1,33 @@
 (ns xchange.api.mutations.request-test
   (:require [clojure.test :refer :all]
-            [xchange.test-utils :refer [invalid-args? valid? missing-args? q]]))
+            [xchange.test-utils :refer [invalid-args? valid? missing-args? q]]
+            [clojure.spec.alpha :as s]))
+
+(deftest request-spec
+
+  (testing "description max length is 5000"
+    (let [exceed-length 5001]
+      (is (not (s/valid?
+                 :xchange.api.resolvers.mutations.request/description
+                 (clojure.string/join
+                   (repeat exceed-length "q")))))))
+
+  (testing "title max length is 100"
+    (let [exceed-length 101]
+      (is (not (s/valid?
+                 :xchange.api.resolvers.mutations.request/title
+                 (clojure.string/join
+                   (repeat exceed-length "q")))))))
+
+  (testing "title is not empty"
+    (is (not (s/valid?
+               :xchange.api.resolvers.mutations.request/title
+               ""))))
+
+  (testing "id is not empty"
+    (is (not (s/valid?
+               :xchange.api.resolvers.mutations.request/id
+               "")))))
 
 (deftest create-request
 
@@ -11,49 +38,6 @@
     (valid? "mutation { create_request (title: \"Tekken 7\"
                                         platform: PC
                                         description: \"Great game.\") { id } }"))
-
-  (testing "description max length is 5000"
-    (let [exceed-length 5001]
-      (invalid-args? '(:description)
-                     (str
-                       "mutation { create_request (title: \"Tekken 7\"
-                                                   platform: PC
-                                                   description: \""
-                       (clojure.string/join
-                         (take exceed-length (repeat "q")))
-                       "\"){ id } }"))))
-
-  (testing "title max length is 100"
-    (let [exceed-length 101]
-      (invalid-args? '(:title)
-                     (str
-                       "mutation { create_request (platform: PC
-                                                   title: \""
-                       (clojure.string/join
-                         (take exceed-length (repeat "q")))
-                       "\"){ id } }"))))
-
-  )
-
-(deftest add-request-comment
-
-  (testing "successfully add a comment"
-    (valid? "mutation { add_request_comment (id: \"1\"
-                                             body: \"body\")
-                                             { id } }"))
-
-  (testing "id and body are required"
-    (missing-args? '(:id :body) "mutation { add_request_comment { id } }"))
-
-  (testing "body max length is 5000"
-    (let [exceed-length 5001]
-      (invalid-args? '(:body)
-                     (str
-                       "mutation { add_request_comment (id: \"1\"
-                                                        body: \""
-                       (clojure.string/join
-                         (take exceed-length (repeat "q")))
-                       "\"){ id } }"))))
 
   )
 

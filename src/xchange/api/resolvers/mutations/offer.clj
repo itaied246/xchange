@@ -1,7 +1,5 @@
 (ns xchange.api.resolvers.mutations.offer
-  (:require [com.walmartlabs.lacinia.resolve :refer [resolve-as]]
-            [xchange.api.schema-validations :as sv]
-            [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as s]
             [xchange.utils.validations :as v]))
 
 (s/def ::price #(< 1 % 999))

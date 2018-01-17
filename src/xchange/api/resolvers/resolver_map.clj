@@ -22,10 +22,10 @@
      :mutation/remove-offer        m.offer/remove-offer
 
      :mutation/create-request      m.request/create-request
-     :mutation/add-request-comment m.request/add-request-comment
      :mutation/update-request      m.request/update-request
      :mutation/remove-request      m.request/remove-request
 
+     :mutation/add-request-comment m.comment/add-request-comment
      :mutation/add-offer-comment   m.comment/add-offer-comment
      :mutation/remove-comment      m.comment/remove-comment
      :mutation/update-comment      m.comment/update-comment}))
