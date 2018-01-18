@@ -4,8 +4,8 @@
 
 (s/def ::price #(< 1 % 999))
 (s/def ::description (partial v/max-length 5000))
-(s/def ::title (s/and (comp not empty?) (partial v/max-length 100)))
-(s/def ::id (comp not empty?))
+(s/def ::title (s/and v/not-empty? (partial v/max-length 100)))
+(s/def ::id v/not-empty?)
 
 (s/def ::offer (s/keys :opt-un [::price ::description ::title ::id]))
 

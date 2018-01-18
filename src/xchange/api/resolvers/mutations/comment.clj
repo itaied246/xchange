@@ -1,31 +1,29 @@
 (ns xchange.api.resolvers.mutations.comment
-  (:require [struct.core :as st]
-            [com.walmartlabs.lacinia.resolve :refer [resolve-as]]
-            [xchange.api.schema-validations :as sv]
-            [xchange.utils.validations :as v]
+  (:require [xchange.utils.validations :as v]
             [clojure.spec.alpha :as s]))
 
-(s/def ::body (s/and string? (comp not empty?) (partial v/max-length 5000)))
-(s/def ::offer-id (s/and string? (comp not empty?)))
-(s/def ::id (s/and string? (comp not empty?)))
+(s/def ::body (s/and v/not-empty? (partial v/max-length 5000)))
+(s/def ::offer-id v/not-empty?)
+(s/def ::id v/not-empty?)
+
+(s/def ::comment (s/keys :opt-un [::id ::offer-id ::body]))
 
 (defn remove-comment
-  [context args value])
+  [context args value]
+  (v/do-if-valid ::comment args
+                 :ok))
 
 (defn update-comment
   [context args values]
-  (let [[res err-msg] (sv/validate-args sv/comment-input-schema args)]
-    (if-not res
-      (resolve-as nil err-msg))))
+  (v/do-if-valid ::comment args
+                 :ok))
 
 (defn add-offer-comment
   [context args value]
-  (let [[res err-msg] (sv/validate-args sv/comment-input-schema args)]
-    (if-not res
-      (resolve-as nil err-msg))))
+  (v/do-if-valid ::comment args
+                 :ok))
 
 (defn add-request-comment
   [context args value]
-  (let [[res err-msg] (sv/validate-args sv/comment-input-schema args)]
-    (if-not res
-      (resolve-as nil err-msg))))
+  (v/do-if-valid ::comment args
+                 :ok))

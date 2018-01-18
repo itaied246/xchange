@@ -6,6 +6,10 @@
   [max val]
   (>= max (count val)))
 
+(defn not-empty?
+  [val]
+  (->> val empty? not))
+
 (defmacro do-if-valid
   [spec val body]
   `(let [conform# (s/conform ~spec ~val)]

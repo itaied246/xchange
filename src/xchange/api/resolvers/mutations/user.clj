@@ -7,7 +7,7 @@
 
 (s/def ::phone (partial re-matches phone-regex))
 (s/def ::email (partial re-matches email-regex))
-(s/def ::name (s/and (comp not empty?) (partial v/max-length 50)))
+(s/def ::name (s/and v/not-empty? (partial v/max-length 50)))
 
 (s/def ::user(s/keys :opt-un [::name ::phone ::email]))
 
