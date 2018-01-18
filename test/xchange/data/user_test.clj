@@ -4,7 +4,7 @@
             [environ.core :refer [env]]
             [xchange.utils.config :refer [create-config]]))
 
-(def con (->> env create-config second :db-url))
+(def con (->> env create-config :db-url))
 
 (deftest user
 

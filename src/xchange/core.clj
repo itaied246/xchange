@@ -7,7 +7,8 @@
 
 (defn -main
   [& args]
-  (let [[err conf] (create-config env)]
-    (if (nil? err)
-      (component/start (system/new-system conf))
-      (println err))))
+  (try
+    (let [conf (create-config env)]
+      (component/start (system/new-system conf)))
+    (catch Exception e
+      (println e))))

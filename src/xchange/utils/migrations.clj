@@ -4,13 +4,14 @@
             [xchange.utils.config :refer [create-config]]))
 
 (def config
-  (let [[err conf] (create-config env)
-        db-url (:db-url conf)]
-    (if (nil? err)
+  (try
+    (let [conf (create-config env)
+          db-url (:db-url conf)]
       {:store         :database
        :migration-dir "migrations"
-       :db            db-url}
-      (println err))))
+       :db            db-url})
+    (catch Exception e
+      (println e))))
 
 (defn create
   [description]
