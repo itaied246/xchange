@@ -9,7 +9,7 @@
 (s/def ::email (partial re-matches email-regex))
 (s/def ::name (s/and v/not-empty? (partial v/max-length 50)))
 
-(s/def ::user(s/keys :opt-un [::name ::phone ::email]))
+(s/def ::user (s/keys :opt-un [::name ::phone ::email]))
 
 (defn create-user
   [context args value]
