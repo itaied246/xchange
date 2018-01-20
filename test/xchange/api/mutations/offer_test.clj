@@ -35,6 +35,17 @@
                :xchange.api.resolvers.mutations.offer/id
                "")))))
 
+(deftest create-offer
+
+  (testing "platform and title are required"
+    (missing-args? '(:platform :title) "mutation { create_offer { id } }"))
+
+  (testing "successfully creates a request"
+    (valid? "mutation { create_offer (price: 100
+                                      title: \"Tekken 7\"
+                                      platform: PC
+                                      description: \"Great game.\") { id } }")))
+
 (deftest update-offer
 
   (testing "successfully update an offer"
@@ -46,9 +57,7 @@
                                       { id } }"))
 
   (testing "id is required"
-    (missing-args? '(:id) "mutation { update_offer { id } }"))
-
-  )
+    (missing-args? '(:id) "mutation { update_offer { id } }")))
 
 (deftest remove-offer
 
@@ -56,6 +65,4 @@
     (valid? "mutation { remove_offer (id: \"1\") }"))
 
   (testing "id is required"
-    (missing-args? '(:id) "mutation { remove_offer }"))
-
-  )
+    (missing-args? '(:id) "mutation { remove_offer }")))
