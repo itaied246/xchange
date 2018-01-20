@@ -25,26 +25,42 @@
                :xchange.api.resolvers.mutations.comment/id
                "")))))
 
+(deftest add-offer-comment
+
+  (testing "id and body are required"
+    (missing-args? '(:id :body) "mutation { add_offer_comment { id } }"))
+
+  (testing "valid mutation schema"
+    (valid? "mutation { add_offer_comment (id: \"1\"
+                                           body: \"desc\")
+                                           { id } }")))
+
+(deftest add-request-comment
+
+  (testing "id and body are required"
+    (missing-args? '(:id :body) "mutation { add_request_comment { id } }"))
+
+  (testing "valid mutation schema"
+    (valid? "mutation { add_request_comment (id: \"1\"
+                                           body: \"desc\")
+                                           { id } }")))
+
 (deftest update-comment
 
   (testing "id is required"
     (missing-args? '(:id) "mutation { update_comment { id } }"))
 
-  (testing "successfully update a comment"
+  (testing "valid mutation schema"
     (valid? "mutation { update_comment (id: \"1\"
                                         body: \"new body\")
-                                        { id } }"))
-
-  )
+                                        { id } }")))
 
 (deftest remove-comment
 
   (testing "id is required"
     (missing-args? '(:id) "mutation { remove_comment }"))
 
-  (testing "successfully remove a comment"
-    (valid? "mutation { remove_comment (id: \"1\") }"))
-
-  )
+  (testing "valid mutation schema"
+    (valid? "mutation { remove_comment (id: \"1\") }")))
 
 
