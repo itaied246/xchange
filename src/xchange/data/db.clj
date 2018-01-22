@@ -6,7 +6,7 @@
   component/Lifecycle
 
   (start [this]
-    (assoc this :db nil))
+    (assoc this :db db-url))
 
   (stop [this]
     (assoc this :db nil)))
