@@ -9,16 +9,19 @@
 (s/def ::request (s/keys :opt-un [::id ::description ::title]))
 
 (defn create-request
-  [context args value]
-  (v/do-if-valid ::request args
-                 :ok))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::request args
+                   :ok)))
 
 (defn update-request
-  [context args value]
-  (v/do-if-valid ::request args
-                 :ok))
+  [fb]
+  (fn [context args value]
+    (v/do-if-valid ::request args
+                   :ok)))
 
 (defn remove-request
-  [context args value]
-  (v/do-if-valid ::request args
-                 :ok))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::request args
+                   :ok)))

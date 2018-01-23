@@ -12,6 +12,7 @@
 (s/def ::user (s/keys :opt-un [::name ::phone ::email]))
 
 (defn create-user
-  [context args value]
-  (v/do-if-valid ::user args
-                 "ok"))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::user args
+                   "ok")))

@@ -9,8 +9,10 @@
   [config]
   (let [{:keys [port db-url]} config]
     (component/system-map
-      :schema (schema/new-schema)
+      :schema (component/using
+                (schema/new-schema)
+                [:db])
       :db (db/new-db db-url)
       :server (component/using
                 (server/new-server port)
-                [:schema :db]))))
+                [:schema]))))

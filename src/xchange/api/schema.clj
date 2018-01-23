@@ -32,7 +32,7 @@
       (util/attach-resolvers (resolver-map component))
       schema/compile))
 
-(defrecord Schema [schema]
+(defrecord Schema [db schema]
 
   component/Lifecycle
 

@@ -10,16 +10,19 @@
 (s/def ::offer (s/keys :opt-un [::price ::description ::title ::id]))
 
 (defn create-offer
-  [context args value]
-  (v/do-if-valid ::offer args
-                 :ok))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::offer args
+                   :ok)))
 
 (defn update-offer
-  [context args value]
-  (v/do-if-valid ::offer args
-                 :ok))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::offer args
+                   :ok)))
 
 (defn remove-offer
-  [context args value]
-  (v/do-if-valid ::offer args
-                 :ok))
+  [db]
+  (fn [context args value]
+    (v/do-if-valid ::offer args
+                   :ok)))

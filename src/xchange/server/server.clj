@@ -3,7 +3,7 @@
             [com.walmartlabs.lacinia.pedestal :as lp]
             [io.pedestal.http :as http]))
 
-(defrecord Server [port schema db server]
+(defrecord Server [port schema server]
 
   component/Lifecycle
 

@@ -2,6 +2,10 @@
   (:require [clojure.java.jdbc :as j]))
 
 (defn insert!
-  [con table row]
-  (j/insert! con table row {:identifiers #(.replace % \_ \-)
-                            :entities    #(.replace % \- \_)}))
+  [db table row]
+  (j/insert! db table row {:identifiers #(.replace % \_ \-)
+                           :entities    #(.replace % \- \_)}))
+
+(defn query
+  [db sql]
+  (j/query db sql))
