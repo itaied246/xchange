@@ -1,6 +1,7 @@
 (ns xchange.api.resolvers.mutations.user
   (:require [clojure.spec.alpha :as s]
-            [xchange.utils.validations :as v]))
+            [xchange.utils.validations :as v]
+            [xchange.data.user :as u]))
 
 (def phone-regex #"\d{10}")
 (def email-regex #"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
@@ -15,4 +16,4 @@
   [db]
   (fn [context args value]
     (v/do-if-valid ::user args
-                   "ok")))
+                   (first (u/create-user db args)))))
