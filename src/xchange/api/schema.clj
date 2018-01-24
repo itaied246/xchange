@@ -27,7 +27,7 @@
        (reduce merge)))
 
 (defn load-schema
-  [{:keys [resolvers]}]
+  [resolvers]
   (-> (build-schema)
       (util/attach-resolvers resolvers)
       schema/compile))

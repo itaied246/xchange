@@ -6,7 +6,7 @@
             [xchange.api.resolvers.queries.user :as q.user]))
 
 (defn create-resolvers
-  [{:keys [db]}]
+  [db]
   (let [id {:id "1"}
         ids [id]]
     {:query/user                   (fn [& _] id)

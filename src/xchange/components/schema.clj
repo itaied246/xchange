@@ -7,7 +7,7 @@
   component/Lifecycle
 
   (start [this]
-    (assoc this :schema (schema/load-schema resolvers)))
+    (assoc this :schema (schema/load-schema (:resolvers resolvers))))
 
   (stop [this]
     (assoc this :schema nil)))

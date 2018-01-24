@@ -3,10 +3,10 @@
             [xchange.data.user :refer [create-user]]
             [environ.core :refer [env]]
             [xchange.utils.config :refer [create-config]]
-            [xchange.data.db :as db]
+            [xchange.components.db :as db]
             [com.stuartsierra.component :as component]))
 
-(def db (->> env create-config :db-url db/new-db component/start))
+(def db (->> env create-config :db-url db/new-db component/start :db))
 
 (deftest user
 

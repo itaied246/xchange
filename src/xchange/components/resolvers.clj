@@ -7,7 +7,7 @@
   component/Lifecycle
 
   (start [this]
-    (assoc this :resolvers (resolvers/create-resolvers db)))
+    (assoc this :resolvers (resolvers/create-resolvers (:db db))))
 
   (stop [this]
     (assoc this :resolvers nil)))
