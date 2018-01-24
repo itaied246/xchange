@@ -4,11 +4,11 @@
 
 (defn create-user
   [db u]
-  (insert! (:db db) :users u))
+  (insert! db :users u))
 
 (defn find-user-by-id
   [db id]
-  (query (:db db)
+  (query db
          (sql/format
            (sql/build :select :*
                       :from :users

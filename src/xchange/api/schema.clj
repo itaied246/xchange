@@ -4,7 +4,7 @@
             [com.walmartlabs.lacinia.schema :as schema]
             [clojure.edn :as edn]
             [com.stuartsierra.component :as component]
-            [xchange.api.resolvers.resolver-map :refer [resolver-map]]))
+            [xchange.api.resolvers.core :refer [create-resolvers]]))
 
 (def type-file
   [[:interfaces "schema/interfaces.edn"]
@@ -26,22 +26,8 @@
        (map load-type)
        (reduce merge)))
 
-(defn- load-schema
-  [component]
+(defn load-schema
+  [{:keys [resolvers]}]
   (-> (build-schema)
-      (util/attach-resolvers (resolver-map component))
+      (util/attach-resolvers resolvers)
       schema/compile))
-
-(defrecord Schema [db schema]
-
-  component/Lifecycle
-
-  (start [this]
-    (assoc this :schema (load-schema this)))
-
-  (stop [this]
-    (assoc this :schema nil)))
-
-(defn new-schema
-  []
-  (map->Schema {}))

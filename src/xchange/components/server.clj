@@ -1,4 +1,4 @@
-(ns xchange.server.server
+(ns xchange.components.server
   (:require [com.stuartsierra.component :as component]
             [com.walmartlabs.lacinia.pedestal :as lp]
             [io.pedestal.http :as http]))

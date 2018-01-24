@@ -1,4 +1,4 @@
-(ns xchange.data.db
+(ns xchange.components.db
   (:require [com.stuartsierra.component :as component]))
 
 (defrecord Database [db-url db]

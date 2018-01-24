@@ -1,7 +1,7 @@
 (ns user
   (:require
     [clojure.java.browse :refer [browse-url]]
-    [xchange.system :as system]
+    [xchange.components.system :as system]
     [com.stuartsierra.component :as component]))
 
 (defonce system (system/new-system {:port 8888}))
