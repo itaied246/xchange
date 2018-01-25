@@ -2,7 +2,7 @@
   (:require [xchange.utils.config :refer [create-config]]
             [environ.core :refer [env]]
             [com.stuartsierra.component :as component]
-            [xchange.system :as system])
+            [xchange.components.system :as system])
   (:gen-class))
 
 (defn -main

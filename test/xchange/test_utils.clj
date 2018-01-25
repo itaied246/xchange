@@ -3,12 +3,19 @@
             [com.stuartsierra.component :as component]
             [clojure.walk :as walk]
             [com.walmartlabs.lacinia :refer [execute]]
-            [xchange.api.schema :refer [new-schema]]
+            [xchange.components.resolvers :as resolvers]
+            [xchange.api.schema :refer [load-schema]]
             [clojure.test :as t]
             [clojure.string :as str])
   (:import (clojure.lang IPersistentMap)))
 
 (defn set= [& vectors] (apply = (map set vectors)))
+
+(defn stub-resolvers
+  [schema]
+  (zipmap
+    (keys schema)
+    (repeat (fn [& _] nil))))
 
 (defn simplify
   "Converts all ordered maps nested within the map into standard hash maps, and
@@ -27,9 +34,11 @@
         node))
     m))
 
-(def schema (-> (new-schema)
-                component/start
-                :schema))
+(def schema (->> (resolvers/new-resolvers)
+                 component/start
+                 :resolvers
+                 stub-resolvers
+                 load-schema))
 
 (defn q
   [query-string]
