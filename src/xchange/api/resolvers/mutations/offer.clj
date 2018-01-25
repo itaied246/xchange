@@ -1,6 +1,7 @@
 (ns xchange.api.resolvers.mutations.offer
   (:require [clojure.spec.alpha :as s]
-            [xchange.utils.validations :as v]))
+            [xchange.utils.validations :as v]
+            [xchange.data.offer :as o]))
 
 (s/def ::price #(< 1 % 999))
 (s/def ::description (partial v/max-length 5000))
@@ -13,7 +14,7 @@
   [db]
   (fn [context args value]
     (v/do-if-valid ::offer args
-                   :ok)))
+                   (first (o/create-offer db args)))))
 
 (defn update-offer
   [db]
