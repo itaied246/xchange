@@ -62,7 +62,7 @@
 
 (defn q
   [schema query-string]
-  (-> (execute schema query-string nil nil)
+  (-> (execute schema query-string nil {:user-id 1})
       simplify))
 
 (defmacro valid?
