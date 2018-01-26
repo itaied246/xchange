@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [xchange.test-utils :as utils]))
 
-(deftest create-user
+(deftest ^:it create-user
 
   (testing "successfully creates a user"
     (let [query "mutation { create_user (name: \"Itai Edri\"
