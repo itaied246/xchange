@@ -29,3 +29,9 @@ docker run -d -e POSTGRES_PASSWORD=pass --net pg --restart always --name postgre
 ```
 docker run -d -p 5050:5050 --name pgadmin --restart always --net pg thajeztah/pgadmin4
 ```
+
+## Testing
+
+`lein test` run all test suites.
+
+`lein test :dev` run unit tests.
