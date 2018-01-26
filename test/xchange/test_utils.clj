@@ -2,11 +2,14 @@
   (:require [clojure.test :refer [is deftest]]
             [com.stuartsierra.component :as component]
             [clojure.walk :as walk]
+            [environ.core :refer [env]]
             [com.walmartlabs.lacinia :refer [execute]]
             [xchange.components.resolvers :as resolvers]
             [xchange.api.schema :refer [load-schema]]
             [clojure.test :as t]
-            [clojure.string :as str])
+            [clojure.string :as str]
+            [xchange.components.db :as db]
+            [xchange.components.schema :as schema])
   (:import (clojure.lang IPersistentMap)))
 
 (defn set= [& vectors] (apply = (map set vectors)))
@@ -34,34 +37,50 @@
         node))
     m))
 
-(def schema (->> (resolvers/new-resolvers)
-                 component/start
-                 :resolvers
-                 stub-resolvers
-                 load-schema))
+(def schema
+  (let [db-url (:db-url env)]
+    (:schema
+      (:schema
+        (component/start
+          (component/system-map
+
+            :db (db/new-db db-url)
+
+            :resolvers (component/using
+                         (resolvers/new-resolvers)
+                         [:db])
+
+            :schema (component/using
+                      (schema/new-schema)
+                      [:resolvers])))))))
+
+(def stub-schema (->> (resolvers/new-resolvers)
+                      component/start
+                      :resolvers
+                      stub-resolvers
+                      load-schema))
 
 (defn q
-  [query-string]
-  (-> schema
-      (execute query-string nil nil)
+  [schema query-string]
+  (-> (execute schema query-string nil nil)
       simplify))
 
 (defmacro valid?
   [query]
-  `(let [res# (q ~query)
+  `(let [res# (q stub-schema ~query)
          err# (->> res# :errors first)]
      (is (nil? err#))))
 
 (defmacro invalid-args?
   [args query]
-  `(let [res# (q ~query)
+  `(let [res# (q stub-schema ~query)
          err-msg# (-> res# :errors first (:message "{}"))
          bad-args# (->> err-msg# read-string keys)]
      (is (set= bad-args# ~args))))
 
 (defmacro missing-args?
   [args query]
-  `(let [res# (q ~query)
+  `(let [res# (q stub-schema ~query)
          err# (->> res# :errors first)]
      (is (set= (:missing-arguments err#) ~args))))
 
