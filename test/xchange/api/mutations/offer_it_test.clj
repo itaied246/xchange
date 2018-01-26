@@ -13,9 +13,16 @@
                                             title
                                             platform
                                             description } }"
-          actual (utils/q utils/schema query)
+          actual (utils/q utils/schema query {:user-id 1})
           expected {:data {:create_offer {:id          "1"
                                           :title       "Tekken 7"
                                           :platform    "PC"
                                           :description "Great game"}}}]
-      (is (= expected actual)))))
+      (is (= expected actual))))
+
+  (testing "fail creating an offer without a user-id"
+    (let [query "mutation { create_offer (platform: PC
+                                          title: \"Tekken 7\")
+                                          { id } }"
+          res (utils/q utils/schema query)]
+      (is (not (nil? (:errors res)))))))

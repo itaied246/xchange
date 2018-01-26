@@ -61,9 +61,10 @@
                       load-schema))
 
 (defn q
-  [schema query-string]
-  (-> (execute schema query-string nil {:user-id 1})
-      simplify))
+  ([schema query-string] (q schema query-string nil))
+  ([schema query-string context]
+   (-> (execute schema query-string nil context)
+       simplify)))
 
 (defmacro valid?
   [query]
