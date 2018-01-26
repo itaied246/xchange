@@ -1,5 +1,5 @@
 (ns xchange.test-utils
-  (:require [clojure.test :refer [is]]
+  (:require [clojure.test :refer [is deftest]]
             [com.stuartsierra.component :as component]
             [clojure.walk :as walk]
             [com.walmartlabs.lacinia :refer [execute]]

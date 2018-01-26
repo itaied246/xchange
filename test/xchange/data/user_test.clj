@@ -8,7 +8,7 @@
 
 (def db (->> env create-config :db-url db/new-db component/start :db))
 
-(deftest ^:integration user
+(deftest ^:it user
 
   (testing "successfully creates a user with all of its properties"
     (let [res (create-user db {:name  "itai"

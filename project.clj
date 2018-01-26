@@ -17,7 +17,7 @@
   :main ^:skip-aot xchange.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
-  :test-selectors {:dev (complement :integration)}
+  :test-selectors {:unit (complement :it)}
   :aliases {"m:create"   ["run" "-m" "xchange.utils.migrations/create"]
             "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
             "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]
