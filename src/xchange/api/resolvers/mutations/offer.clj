@@ -10,11 +10,18 @@
 
 (s/def ::offer (s/keys :opt-un [::price ::description ::title ::id]))
 
+(defn- convert-offer
+  [offer]
+  (update offer :platform name))
+
 (defn create-offer
   [db]
   (fn [context args value]
     (v/do-if-valid ::offer args
-                   (first (o/create-offer db args)))))
+                   (->> args
+                        convert-offer
+                        (o/create-offer db)
+                        first))))
 
 (defn update-offer
   [db]
