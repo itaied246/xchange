@@ -18,7 +18,8 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
   :test-selectors {:unit (complement :it)}
-  :aliases {"m:create"   ["run" "-m" "xchange.utils.migrations/create"]
+  :aliases {"mt:create"  ["run" "-m" "xchange.utils.test-data/create"]
+            "m:create"   ["run" "-m" "xchange.utils.migrations/create"]
             "m:migrate"  ["run" "-m" "xchange.utils.migrations/migrate"]
             "m:rollback" ["run" "-m" "xchange.utils.migrations/rollback"]
             "m:reset"    ["run" "-m" "xchange.utils.migrations/reset"]

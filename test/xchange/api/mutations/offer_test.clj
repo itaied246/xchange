@@ -40,7 +40,7 @@
   (testing "platform and title are required"
     (missing-args? '(:platform :title) "mutation { create_offer { id } }"))
 
-  (testing "successfully creates a request"
+  (testing "successfully creates an offer"
     (valid? "mutation { create_offer (price: 100
                                       title: \"Tekken 7\"
                                       platform: PC
